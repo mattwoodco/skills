@@ -28,16 +28,6 @@ Each skill/feature lives under`skills/<name>/SKILL.md`, following the [Agent Ski
 
 ---
 
-## Skills (registered)
-
-| Skill         | Purpose                                      |
-| ------------- | -------------------------------------------- |
-| `add-spec`    | Write a project spec                         |
-| `add-feature` | Feature development (routes to other skills) |
-| `add-project` | Build a new project from idea -> spec -> shell |
-
----
-
 ## Features (routed)
 
 Features are written in skill format and become available when routed to by the entry skills. They are not registered in the plugin's top-level skills list.
