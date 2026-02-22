@@ -5,16 +5,16 @@ Agent skill factory to create skills for feature and project development.
 
 Each skill/feature lives under`skills/<name>/SKILL.md`, following the [Agent Skills spec](https://agentskills.io).
 
-- `skills/` - current skills and routed feature skills
-- `specs/` - generated specs
-- `loops/` - generated ralph loops
-
 ## Install
 
 ```text
 /plugin marketplace add mattwoodco/skills
 /plugin install skills@mattwoodco
 ```
+
+- `skills/` - current skills and routed feature skills
+- `specs/` - generated specs
+- `loops/` - generated ralph loops
 
 1. **Entry skills**
    - `add-project`: start a new project from an idea
