@@ -16,16 +16,6 @@ Each skill/feature lives under`skills/<name>/SKILL.md`, following the [Agent Ski
 /plugin install skills@mattwoodco
 ```
 
-1. **Entry skills**
-   - `add-project`: start a new project from an idea
-   - `add-feature`: add one thing to an existing project
-   - `add-spec`: write the spec only
-2. **Feature skills**
-   - building blocks like `db`, `auth`, `ai-chat`, `payments`, `realtime`
-   - used by the entry skills in dependency order
-3. **Validation and operations**
-   - `test-skills`, `improve-skill`, `eval-projects`, `ralph-ci`
-
 ---
 
 ## Features (routed)
