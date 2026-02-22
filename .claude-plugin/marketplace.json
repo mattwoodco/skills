@@ -1,0 +1,15 @@
+{
+	"name": "mattwoodco",
+	"description": "Agent skills for feature and project development. Includes add-feature and add-project.",
+	"owner": {
+		"name": "mattwoodco"
+	},
+	"plugins": [
+		{
+			"name": "skills",
+			"source": "./",
+			"description": "Agent skills for feature and project development.",
+			"version": "1.0.0"
+		}
+	]
+}

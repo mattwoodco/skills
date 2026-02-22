@@ -1,0 +1,29 @@
+# Node and build artifacts
+node_modules/
+.next/
+.turbo/
+sandbox/
+
+# Vercel deployment
+.vercel/
+
+# IDE and system files
+.vscode/
+.DS_Store
+
+# Environment variables
+.env
+.env.*
+*.env
+*.env.*
+
+# Example environment files
+*.env.example
+*.env.*.example
+# Playwright output
+.playwright*
+
+# Ralph logs
+.ralph/logs*
+specs/.private
+skills/.private

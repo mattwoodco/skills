@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Scaffold Guide",
+  "description": "Tiered scaffold layers. Complete each tier in order before specializing.",
+  "version": "2.0.0",
+  "tiers": [
+    {
+      "tier": 0,
+      "name": "Every Project",
+      "required": true,
+      "layers": [
+        {
+          "id": "app-shell",
+          "skills": ["create-next"],
+          "produces": "Next.js, TypeScript, Tailwind, Biome, Bun, folder conventions"
+        },
+        {
+          "id": "runtime",
+          "skills": ["docker", "env-config"],
+          "produces": "Local services, typed env contracts, dev/prod config"
+        },
+        {
+          "id": "ui-data",
+          "skills": ["add-shadcn", "db"],
+          "produces": "UI primitives (shadcn), Drizzle + Postgres"
+        },
+        {
+          "id": "testing",
+          "skills": ["e2e"],
+          "produces": "Playwright harness + CI workflow"
+        }
+      ]
+    },
+    {
+      "tier": 1,
+      "name": "Most Apps",
+      "required": false,
+      "layers": [
+        {
+          "id": "auth",
+          "skills": ["auth", "auth-dev"],
+          "produces": "Session model, guards, account UI, role hooks",
+          "when": "Any user identity, permissions, billing, or private data"
+        },
+        {
+          "id": "ai",
+          "skills": ["ai-core", "ai-chat", "ai-reasoning", "ai-artifacts"],
+          "produces": "Model abstraction, streaming chat, reasoning, artifact rendering",
+          "when": "Conversational AI or copilot UX"
+        },
+        {
+          "id": "background-jobs",
+          "skills": ["queue"],
+          "produces": "Durable background execution",
+          "when": "Work exceeds request/response time budgets"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Specialized Capabilities",
+      "required": false,
+      "packs": {
+        "collaboration": [
+          {
+            "id": "realtime-state",
+            "skills": ["realtime"],
+            "produces": "Presence + synchronized collaborative state",
+            "requires": ["auth"]
+          },
+          {
+            "id": "human-chat",
+            "skills": ["group-chat", "notifications-push"],
+            "produces": "Threaded chat, reactions, mentions, notification hooks",
+            "requires": ["realtime-state"]
+          },
+          {
+            "id": "e2e-chat",
+            "skills": ["e2e-chat"],
+            "produces": "Chat-specific regression coverage",
+            "requires": ["human-chat", "testing"]
+          }
+        ],
+        "video-media": [
+          {
+            "id": "video-rooms",
+            "skills": ["video-room", "video-ui", "screen-share", "audio-room"],
+            "produces": "WebRTC rooms, participant UI, screen share, audio spaces",
+            "requires": ["auth"]
+          },
+          {
+            "id": "transcription",
+            "skills": ["transcription"],
+            "produces": "Real-time or post-session speech-to-text",
+            "requires": ["video-rooms"]
+          },
+          {
+            "id": "meeting-intel",
+            "skills": ["ai-captions", "ai-meeting-notes", "ai-voice-room"],
+            "produces": "Live captions, structured summaries, AI participant",
+            "requires": ["transcription", "ai"]
+          },
+          {
+            "id": "recording",
+            "skills": ["recording"],
+            "produces": "Session capture and archival",
+            "requires": ["video-rooms"]
+          },
+          {
+            "id": "streaming",
+            "skills": ["stream-mux", "video-player", "livestream", "video-messaging"],
+            "produces": "Live distribution, VOD lifecycle, playback, async video",
+            "requires": ["recording", "background-jobs"]
+          },
+          {
+            "id": "e2e-media",
+            "skills": ["e2e-video", "e2e-streaming"],
+            "produces": "Media/streaming regression coverage",
+            "requires": ["video-rooms", "testing"]
+          }
+        ],
+        "visual": [
+          {
+            "id": "flow-canvas",
+            "skills": ["react-flow"],
+            "produces": "Node/edge workflow canvas",
+            "requires": ["ui-data"]
+          }
+        ]
+      }
+    },
+    {
+      "tier": 3,
+      "name": "Ops & Automation",
+      "required": false,
+      "layers": [
+        {
+          "id": "ci-cd",
+          "skills": ["ralph-ci", "openclaw-generator"],
+          "produces": "Autonomous build and deployment loops"
+        },
+        {
+          "id": "skill-governance",
+          "skills": ["improve-skill", "test-skills"],
+          "produces": "Skill quality loops"
+        }
+      ]
+    }
+  ],
+  "extensionPoints": [
+    {
+      "id": "storage",
+      "note": "File/media persistence, referenced by chat and video skills"
+    },
+    {
+      "id": "ai-tools",
+      "note": "Tool-use framework, referenced by artifacts and meeting intel"
+    },
+    {
+      "id": "add-pwa",
+      "note": "Progressive web app support, referenced by push notifications"
+    }
+  ]
+}

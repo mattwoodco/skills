@@ -1,0 +1,10 @@
+{
+	"name": "skills",
+	"version": "1.0.0",
+	"description": "Agent skills for feature and project development. Includes add-feature, add-spec, and add-project.",
+	"skills": [
+		"./skills/add-feature",
+		"./skills/add-spec",
+		"./skills/add-project"
+	]
+}
