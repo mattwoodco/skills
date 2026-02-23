@@ -36,6 +36,7 @@ src/
 ```
 
 Plus modification to:
+
 ```
 src/app/api/ai/chat/route.ts    # MODIFIED — connect MCP, merge tools, close clients
 ```
@@ -194,15 +195,15 @@ Add the MCP imports at the top of the file.
 Find this:
 
 ```typescript
-import { allTools } from "@/lib/ai/tools";
+import { allTools } from "@src/lib/ai/tools";
 ```
 
 Replace with:
 
 ```typescript
-import { allTools } from "@/lib/ai/tools";
-import { connectMCPServers } from "@/lib/ai/mcp/client";
-import { mcpServers } from "@/lib/ai/mcp/servers";
+import { allTools } from "@src/lib/ai/tools";
+import { connectMCPServers } from "@src/lib/ai/mcp/client";
+import { mcpServers } from "@src/lib/ai/mcp/servers";
 ```
 
 Next, connect MCP servers and merge their tools. Find this:
@@ -277,11 +278,13 @@ Replace with:
 ### Adding an MCP Server
 
 1. Add any required API keys to `.env.local`:
+
    ```
    BRAVE_API_KEY=your-key-here
    ```
 
 2. Add a server config to the `mcpServers` array in `src/lib/ai/mcp/servers.ts`:
+
    ```typescript
    export const mcpServers: MCPServerConfig[] = [
      {

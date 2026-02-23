@@ -15,8 +15,8 @@ Dispatch an AI voice agent into a LiveKit video room as a real participant. The 
 
 - Next.js app with `src/` directory and App Router
 - `video-room` skill installed (LiveKit room + participant tokens)
-- `ai-core` skill installed (`getModel()` at `@/lib/ai`)
-- `transcription` skill installed (Deepgram client at `@/lib/video/transcription`)
+- `ai-core` skill installed (`getModel()` at `@src/lib/ai`)
+- `transcription` skill installed (Deepgram client at `@src/lib/video/transcription`)
 - `env-config` skill installed (`src/env.ts`)
 - shadcn/ui initialized
 
@@ -244,7 +244,7 @@ export function listPersonas(): Array<{ id: string; name: string; speakingStyle:
 ```typescript
 import { AccessToken } from "livekit-server-sdk";
 import { generateText } from "ai";
-import { getModel } from "@/lib/ai";
+import { getModel } from "@src/lib/ai";
 import { getPersona } from "./agent-personas";
 import type {
   VoiceAgentConfig,
@@ -442,9 +442,9 @@ import {
   removeVoiceAgent,
   removeAllAgentsFromRoom,
   listActiveAgents,
-} from "@/lib/ai/voice-agent";
-import { listPersonas } from "@/lib/ai/agent-personas";
-import type { DispatchAgentRequest } from "@/lib/ai/types-voice-agent";
+} from "@src/lib/ai/voice-agent";
+import { listPersonas } from "@src/lib/ai/agent-personas";
+import type { DispatchAgentRequest } from "@src/lib/ai/types-voice-agent";
 
 /**
  * GET /api/ai/voice-agent — list active agents and available personas
@@ -546,8 +546,8 @@ export async function DELETE(request: Request) {
 "use client";
 
 import { useId } from "react";
-import { cn } from "@/lib/utils";
-import type { AgentState } from "@/lib/ai/types-voice-agent";
+import { cn } from "@src/lib/utils";
+import type { AgentState } from "@src/lib/ai/types-voice-agent";
 
 type AgentInfo = {
   participantIdentity: string;
@@ -763,7 +763,7 @@ await fetch("/api/ai/voice-agent?roomName=meeting-standup-2026-02-18", {
 
 import { useState, useEffect, useId } from "react";
 import { AIAgentList } from "@/components/video/ai-agent-indicator";
-import type { AgentState } from "@/lib/ai/types-voice-agent";
+import type { AgentState } from "@src/lib/ai/types-voice-agent";
 
 type AgentApiItem = {
   participantIdentity: string;
@@ -837,7 +837,7 @@ export function RoomAgentPanel({ roomName }: { roomName: string }) {
 ### Generate a Response (Worker-Side)
 
 ```typescript
-import { generateAgentResponse } from "@/lib/ai/voice-agent";
+import { generateAgentResponse } from "@src/lib/ai/voice-agent";
 
 // In your background worker processing loop:
 const response = await generateAgentResponse(

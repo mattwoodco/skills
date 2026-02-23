@@ -17,7 +17,7 @@ The key innovation: agents run SEQUENTIALLY, not in parallel. PM writes the happ
 ## Prerequisites
 
 - Next.js app with `src/` directory and App Router
-- `ai-core` skill installed (`getModel()` available at `@/lib/ai`)
+- `ai-core` skill installed (`getModel()` available at `@src/lib/ai`)
 - `ai-chat` skill installed (provides chat page, `withAuth` from auth dependency)
 - shadcn/ui initialized
 
@@ -228,11 +228,11 @@ export function buildAgentPrompt(
 
 ```typescript
 import { streamText } from "ai";
-import { getModel } from "@/lib/ai";
-import { withAuth } from "@/lib/auth-guard";
-import { getAllAgents } from "@/lib/ai/agents/registry";
-import { buildAgentPrompt } from "@/lib/ai/agents/prompts";
-import type { DebateStreamEvent } from "@/lib/ai/agents/types";
+import { getModel } from "@src/lib/ai";
+import { withAuth } from "@src/lib/auth-guard";
+import { getAllAgents } from "@src/lib/ai/agents/registry";
+import { buildAgentPrompt } from "@src/lib/ai/agents/prompts";
+import type { DebateStreamEvent } from "@src/lib/ai/agents/types";
 
 export const POST = withAuth(async (request, { user: _user }) => {
   const { context }: { context: string } = await request.json();
@@ -299,7 +299,7 @@ export const POST = withAuth(async (request, { user: _user }) => {
 ### Step 5: Create `src/components/ai/multi-agent/agent-badge.tsx`
 
 ```tsx
-import type { AgentRole } from "@/lib/ai/agents/types";
+import type { AgentRole } from "@src/lib/ai/agents/types";
 
 type AgentBadgeProps = {
   name: string;
@@ -330,7 +330,7 @@ import { memo } from "react";
 import { Check, X } from "@phosphor-icons/react";
 import { AgentBadge } from "@/components/ai/multi-agent/agent-badge";
 import { Loader } from "@/components/ai/loader";
-import type { AgentRole } from "@/lib/ai/agents/types";
+import type { AgentRole } from "@src/lib/ai/agents/types";
 
 type AgentMessageProps = {
   agentId: string;
@@ -472,7 +472,7 @@ import type {
   AgentRole,
   AgentMessage as AgentMessageType,
   DebateStreamEvent,
-} from "@/lib/ai/agents/types";
+} from "@src/lib/ai/agents/types";
 
 type DebatePanelProps = {
   context: string;
@@ -811,7 +811,7 @@ After a debate completes, update the spec context (incorporating accepted observ
 ### Registering Custom Agents
 
 ```typescript
-import { registerAgent } from "@/lib/ai/agents/registry";
+import { registerAgent } from "@src/lib/ai/agents/registry";
 
 registerAgent({
   id: "security",
@@ -840,7 +840,7 @@ Respond with 2-4 observations. Each starts with a tag:
 Each agent's `systemPrompt` field in the registry can be updated directly:
 
 ```typescript
-import { getAgent, registerAgent } from "@/lib/ai/agents/registry";
+import { getAgent, registerAgent } from "@src/lib/ai/agents/registry";
 
 const pm = getAgent("pm");
 if (pm) {

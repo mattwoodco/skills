@@ -49,7 +49,7 @@ src/
 import { useState, useEffect, useCallback, type ReactNode } from "react";
 import { LiveKitRoom } from "@livekit/components-react";
 import "@livekit/components-styles/prefabs.css";
-import type { TokenResponse } from "@/lib/video/types";
+import type { TokenResponse } from "@src/lib/video/types";
 
 type VideoRoomProviderProps = {
   roomName: string;
@@ -945,6 +945,7 @@ function Lobby({ roomName }: { roomName: string }) {
 **Cause**: Browser permissions for camera/microphone were denied, or the page is not served over HTTPS.
 
 **Fix**:
+
 1. Check browser permissions in the address bar
 2. For local development, `localhost` is treated as secure
 3. For deployment, ensure the site is served over HTTPS

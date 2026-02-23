@@ -18,8 +18,8 @@ Designed to bridge an existing knowledge base (e.g. a voice agent's knowledge it
 
 - Next.js app with `src/` directory and App Router
 - `ai-rag-ingest` skill installed (`document` + `documentPage` tables in `@/db/schema/rag`)
-- `ai-rag-vectors` skill installed (`indexDocument()` at `@/lib/rag/embeddings`)
-- `auth` skill installed (`withAuth` at `@/lib/auth-guard`)
+- `ai-rag-vectors` skill installed (`indexDocument()` at `@src/lib/rag/embeddings`)
+- `auth` skill installed (`withAuth` at `@src/lib/auth-guard`)
 - `docker` skill installed (PostgreSQL running)
 
 ## Installation
@@ -285,7 +285,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { document, documentPage } from "@/db/schema/rag";
 import { syncJob, syncItem } from "@/db/schema/knowledge-sync";
-import { indexDocument } from "@/lib/rag/embeddings";
+import { indexDocument } from "@src/lib/rag/embeddings";
 import { fetchKnowledgeItems } from "./fetcher";
 import { mapToDocument } from "./mapper";
 
@@ -436,11 +436,11 @@ export async function runKnowledgeSync(userId: string): Promise<string> {
 
 ```typescript
 import { NextResponse } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
+import { withAuth } from "@src/lib/auth-guard";
 import { db } from "@/db";
 import { syncJob, syncItem } from "@/db/schema/knowledge-sync";
 import { eq, desc } from "drizzle-orm";
-import { runKnowledgeSync } from "@/lib/knowledge/sync";
+import { runKnowledgeSync } from "@src/lib/knowledge/sync";
 
 /** GET /api/knowledge/sync — list sync jobs for the current user */
 export const GET = withAuth(async (_request, { user }) => {
@@ -496,7 +496,7 @@ export const POST = withAuth(async (_request, { user }) => {
 
 ```typescript
 import { NextResponse } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
+import { withAuth } from "@src/lib/auth-guard";
 import { db } from "@/db";
 import { document } from "@/db/schema/rag";
 import { eq, desc, sql } from "drizzle-orm";

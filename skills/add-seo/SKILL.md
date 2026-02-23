@@ -143,7 +143,7 @@ Update `app/layout.tsx` to use shared metadata:
 
 ```tsx
 import type { Viewport } from "next";
-import { sharedMetadata } from "@/lib/metadata";
+import { sharedMetadata } from "@src/lib/metadata";
 
 export const metadata = sharedMetadata;
 
@@ -163,7 +163,7 @@ Create `app/sitemap.ts`:
 
 ```ts
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/metadata";
+import { siteConfig } from "@src/lib/metadata";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/about"].map((route) => ({
@@ -181,7 +181,7 @@ For large sites with dynamic content, use `generateSitemaps` for sitemap index:
 
 ```ts
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/metadata";
+import { siteConfig } from "@src/lib/metadata";
 
 export async function generateSitemaps() {
   // Return an array of sitemap IDs
@@ -216,7 +216,7 @@ Create `app/robots.ts`:
 
 ```ts
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/metadata";
+import { siteConfig } from "@src/lib/metadata";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -334,7 +334,7 @@ The `.replace(/</g, "\\u003c")` prevents XSS injection via HTML tags in JSON-LD 
 
 ```tsx
 // app/about/page.tsx
-import { createMetadata } from "@/lib/metadata";
+import { createMetadata } from "@src/lib/metadata";
 
 export const metadata = createMetadata({
   title: "About",
@@ -352,8 +352,8 @@ export default function AboutPage() {
 ```tsx
 // app/posts/[slug]/page.tsx
 import type { Metadata } from "next";
-import { createMetadata, siteConfig } from "@/lib/metadata";
-import { JsonLd } from "@/lib/structured-data";
+import { createMetadata, siteConfig } from "@src/lib/metadata";
+import { JsonLd } from "@src/lib/structured-data";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -395,8 +395,8 @@ export default async function PostPage({ params }: Props) {
 
 ```tsx
 // app/layout.tsx
-import { JsonLd } from "@/lib/structured-data";
-import { siteConfig } from "@/lib/metadata";
+import { JsonLd } from "@src/lib/structured-data";
+import { siteConfig } from "@src/lib/metadata";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -453,6 +453,7 @@ Next.js merges metadata **top-down**: root layout → nested layouts → page.
 ### OG image not updating on social media
 
 Social platforms aggressively cache OG images. Use their debug tools to refresh:
+
 - Facebook: [Sharing Debugger](https://developers.facebook.com/tools/debug/)
 - Twitter/X: [Card Validator](https://cards-dev.twitter.com/validator)
 

@@ -127,7 +127,7 @@ import {
   ArrowsOut,
 } from "@phosphor-icons/react";
 import { useVideoTimeline } from "./use-video-timeline";
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 
 export type VideoHotspot = {
   id: string;

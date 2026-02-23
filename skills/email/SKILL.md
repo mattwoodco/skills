@@ -43,6 +43,7 @@ bun add resend react-email @react-email/components
 Ensure your `tsconfig.json` has proper path mapping:
 
 **For projects with `src/` directory:**
+
 ```json
 {
   "compilerOptions": {
@@ -54,6 +55,7 @@ Ensure your `tsconfig.json` has proper path mapping:
 ```
 
 **For projects without `src/` directory (`--no-src-dir`):**
+
 ```json
 {
   "compilerOptions": {
@@ -295,7 +297,7 @@ export function NotificationEmail({ title, message, actionUrl, actionText }: Pro
 ### Send Auth Code
 
 ```typescript
-import { sendEmail } from "@/lib/email";
+import { sendEmail } from "@src/lib/email";
 import { AuthCodeEmail } from "@/emails/auth-code";
 
 await sendEmail({
@@ -351,11 +353,12 @@ await sendEmail({
 ## Local Development
 
 1. Start Docker stack (includes Mailpit):
+
    ```bash
    docker compose up -d
    ```
 
-2. View sent emails at: http://localhost:8025
+2. View sent emails at: <http://localhost:8025>
 
 3. All emails sent locally go to Mailpit regardless of recipient
 
@@ -367,7 +370,7 @@ Preview all templates in browser:
 bunx email dev
 ```
 
-Opens React Email preview at http://localhost:3000
+Opens React Email preview at <http://localhost:3000>
 
 ## Integration with Auth
 
@@ -384,6 +387,7 @@ This email setup is ready for auth integration:
 2. Verify your domain
 3. Get API key (starts with `re_`)
 4. Add to production environment variables:
+
    ```env
    RESEND_API_KEY=re_your_key_here
    EMAIL_FROM=noreply@yourdomain.com
@@ -399,6 +403,7 @@ To add more templates later:
 4. Import and use in your code
 
 **Common additions:**
+
 - Welcome email
 - Email verification
 - Account deletion confirmation
@@ -410,11 +415,13 @@ To add more templates later:
 ### Emails not sending to Mailpit
 
 1. **Check Mailpit is running:**
+
    ```bash
    docker ps | grep mailpit
    ```
 
 2. **Verify SMTP port:** Check your Mailpit container ports. Some configurations use different ports:
+
    ```bash
    docker ps --format "{{.Names}}\t{{.Ports}}" | grep mailpit
    ```
@@ -424,18 +431,20 @@ To add more templates later:
    - Alternative: `1026:1025` (SMTP) and `8026:8025` (Web UI)
 
    Update your `.env.local` to match your actual ports:
+
    ```env
    SMTP_PORT=1026  # Use your actual SMTP port
    ```
 
 3. **Check EMAIL_FROM is set:** Ensure `.env.local` includes:
+
    ```env
    EMAIL_FROM=noreply@example.com
    ```
 
 4. **View Mailpit UI:** Open your browser to the correct port:
-   - Default: http://localhost:8025
-   - Alternative: http://localhost:8026
+   - Default: <http://localhost:8025>
+   - Alternative: <http://localhost:8026>
 
 ### TypeScript errors in email templates
 
@@ -444,6 +453,7 @@ If you see import errors, ensure your `tsconfig.json` paths match your project s
 ### React Email preview not loading
 
 The preview server may conflict with your Next.js dev server. Use a different port:
+
 ```bash
 bunx email dev --port 3001
 ```

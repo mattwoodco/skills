@@ -350,11 +350,11 @@ export type NewVideo = typeof videos.$inferInsert;
 "use client";
 
 import { useCallback, useId, useRef, useState } from "react";
-import { useMediaBunny } from "@/lib/media-bunny/use-media-bunny";
+import { useMediaBunny } from "@src/lib/media-bunny/use-media-bunny";
 import type {
   VideoInfo,
   VideoProcessingOptions,
-} from "@/lib/media-bunny/types";
+} from "@src/lib/media-bunny/types";
 
 type ConversionResult = {
   blob: Blob;
@@ -703,10 +703,10 @@ export function VideoProcessorWrapper() {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
-import { videos, type Video, type NewVideo } from "@/lib/db/schema/videos";
+import { db } from "@src/lib/db";
+import { videos, type Video, type NewVideo } from "@src/lib/db/schema/videos";
 import { desc } from "drizzle-orm";
-import { auth } from "@/lib/auth";
+import { auth } from "@src/lib/auth";
 import { headers } from "next/headers";
 
 export async function GET(): Promise<NextResponse<{ videos: Video[] } | { error: string }>> {
@@ -766,10 +766,10 @@ export async function POST(
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
-import { videos, type Video } from "@/lib/db/schema/videos";
+import { db } from "@src/lib/db";
+import { videos, type Video } from "@src/lib/db/schema/videos";
 import { eq } from "drizzle-orm";
-import { auth } from "@/lib/auth";
+import { auth } from "@src/lib/auth";
 import { headers } from "next/headers";
 
 type RouteParams = { params: Promise<{ id: string }> };
@@ -891,7 +891,7 @@ export default function VideoPage() {
 ```tsx
 "use client";
 
-import { useMediaBunny } from "@/lib/media-bunny/use-media-bunny";
+import { useMediaBunny } from "@src/lib/media-bunny/use-media-bunny";
 
 function MyComponent() {
   const { isLoading, isSupported, getVideoInfo } = useMediaBunny();
@@ -910,7 +910,7 @@ function MyComponent() {
 ```tsx
 "use client";
 
-import { useMediaBunny } from "@/lib/media-bunny/use-media-bunny";
+import { useMediaBunny } from "@src/lib/media-bunny/use-media-bunny";
 
 function MyComponent() {
   const { convertVideo } = useMediaBunny();

@@ -17,7 +17,7 @@ RAG-powered chat that retrieves relevant document chunks via vector search, inje
 
 - Next.js app with `src/` directory and App Router
 - `ai-chat` skill installed (streaming chat at `/api/ai/chat`, UI components)
-- `ai-rag-vectors` skill installed (`searchChunks()` at `@/lib/rag/search`)
+- `ai-rag-vectors` skill installed (`searchChunks()` at `@src/lib/rag/search`)
 - shadcn/ui initialized
 
 ## Installation
@@ -52,11 +52,11 @@ import {
   type UIMessage,
   type JSONValue,
 } from "ai";
-import { getModel } from "@/lib/ai";
-import { withAuth } from "@/lib/auth-guard";
-import { searchChunks } from "@/lib/rag/search";
-import { db } from "@/lib/db";
-import { chatSession, chatMessage } from "@/lib/db/schema/chat";
+import { getModel } from "@src/lib/ai";
+import { withAuth } from "@src/lib/auth-guard";
+import { searchChunks } from "@src/lib/rag/search";
+import { db } from "@src/lib/db";
+import { chatSession, chatMessage } from "@src/lib/db/schema/chat";
 import { eq, and } from "drizzle-orm";
 
 type RagChatBody = {

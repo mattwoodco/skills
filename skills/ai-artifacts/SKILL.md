@@ -958,14 +958,14 @@ Replace with:
 Add the import at the top of the file. Find:
 
 ```typescript
-import { allTools } from "@/lib/ai/tools";
+import { allTools } from "@src/lib/ai/tools";
 ```
 
 Replace with:
 
 ```typescript
-import { allTools } from "@/lib/ai/tools";
-import { artifactTools } from "@/lib/ai/tools/artifact";
+import { allTools } from "@src/lib/ai/tools";
+import { artifactTools } from "@src/lib/ai/tools/artifact";
 ```
 
 Also append artifact instructions to the system prompt. Find:
@@ -1011,6 +1011,7 @@ Once installed, the AI can create artifacts via tool calls during chat:
 - **Markdown**: "Write a project README"
 
 The artifact appears in the resizable right panel. Users can:
+
 - Click artifact cards in chat messages to focus the panel
 - Copy artifact content with the copy button
 - Resize the panel by dragging its left edge

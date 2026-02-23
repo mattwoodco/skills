@@ -74,6 +74,7 @@ volumes:
 ## Prerequisites
 
 Add `scripts/` to tsconfig.json `exclude` to avoid path resolution errors with seed scripts:
+
 ```json
 {
   "exclude": ["node_modules", "scripts"]
@@ -81,6 +82,7 @@ Add `scripts/` to tsconfig.json `exclude` to avoid path resolution errors with s
 ```
 
 Also add `MEILISEARCH_SEARCH_KEY` and `VERCEL_ENV` to your `src/env.ts` server section:
+
 ```typescript
 MEILISEARCH_SEARCH_KEY: z.string().optional(),
 VERCEL_ENV: z.string().optional(),
@@ -322,7 +324,7 @@ export async function healthCheck() {
 
 ```typescript
 import { NextResponse, type NextRequest } from "next/server";
-import { cachedSearch, sanitizeSearchQuery } from "@/lib/search";
+import { cachedSearch, sanitizeSearchQuery } from "@src/lib/search";
 import { z } from "zod";
 
 const ALLOWED_ORIGINS = [
@@ -790,7 +792,7 @@ import { useRouter } from "next/navigation";
 import { SearchIcon, LoaderIcon, XIcon } from "lucide-react";
 import { useHotkey, useEscapeKey } from "@/hooks/use-hotkey";
 import { useSearch } from "@/hooks/use-search";
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 
 type SearchModalProps = {
   open?: boolean;
@@ -993,7 +995,7 @@ export default function SearchPage() {
 ### File: `scripts/seed-search.ts`
 
 ```typescript
-import { searchClient, configureIndex, indexDocuments, waitForTask } from "@/lib/search";
+import { searchClient, configureIndex, indexDocuments, waitForTask } from "@src/lib/search";
 
 async function seedSearchIndex() {
   console.log("Configuring products index...");
@@ -1057,6 +1059,7 @@ seedSearchIndex().catch(console.error);
 ```
 
 Run with:
+
 ```bash
 bun run scripts/seed-search.ts
 ```
@@ -1132,6 +1135,7 @@ sort=createdAt:desc
 ## Troubleshooting
 
 **Search returns empty results?**
+
 ```bash
 # Check if index exists
 curl http://localhost:7700/indexes/products -H "Authorization: Bearer devMasterKey123"
@@ -1141,6 +1145,7 @@ curl http://localhost:7700/indexes/products/documents -H "Authorization: Bearer 
 ```
 
 **Meilisearch not responding?**
+
 ```bash
 # Check health endpoint
 curl http://localhost:7700/health
@@ -1155,6 +1160,7 @@ The inline rate limiter uses an in-memory Map. Restart the dev server to clear r
 ### Meilisearch SDK API changes (v0.55+)
 
 **`waitForTask`/`getTask` moved to `searchClient.tasks`**:
+
 ```typescript
 // ❌ Incorrect — these methods don't exist on MeiliSearch instance
 searchClient.waitForTask(taskUid);
@@ -1166,6 +1172,7 @@ searchClient.tasks.getTask(taskUid);
 ```
 
 **Zod v4 changed `ZodError.errors` to `ZodError.issues`**:
+
 ```typescript
 // ❌ Incorrect — property doesn't exist in Zod v4
 error.errors
@@ -1175,6 +1182,7 @@ error.issues
 ```
 
 **React 19 `useRef()` requires initial value**:
+
 ```typescript
 // ❌ Incorrect — TypeScript error in React 19
 const ref = useRef<AbortController>();
@@ -1210,6 +1218,7 @@ export function NavBar() {
 ## Dark Mode Support
 
 The search components use Tailwind CSS variables for theming:
+
 - `bg-background`, `text-foreground` for main surfaces
 - `bg-accent`, `text-accent-foreground` for interactive states
 - `text-muted-foreground` for secondary text

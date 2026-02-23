@@ -276,8 +276,8 @@ export function useEditor(imageUrl: string) {
 import { useEffect, useState, useRef, useCallback, useId, memo } from "react";
 import { Stage, Layer, Image as KonvaImage, Line } from "react-konva";
 import type Konva from "konva";
-import { applyFilters } from "@/lib/image-editor/filters";
-import type { EditorState, MaskLine } from "@/lib/image-editor/types";
+import { applyFilters } from "@src/lib/image-editor/filters";
+import type { EditorState, MaskLine } from "@src/lib/image-editor/types";
 
 type EditorCanvasProps = {
   state: EditorState;
@@ -475,7 +475,7 @@ export function Toolbar({
 
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import type { FilterValues } from "@/lib/image-editor/types";
+import type { FilterValues } from "@src/lib/image-editor/types";
 
 type FilterPanelProps = {
   filters: FilterValues;
@@ -610,7 +610,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import dynamic from "next/dynamic";
-import { useEditor } from "@/lib/image-editor/use-editor";
+import { useEditor } from "@src/lib/image-editor/use-editor";
 import { Toolbar } from "./toolbar";
 
 const EditorCanvas = dynamic(

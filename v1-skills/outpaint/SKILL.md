@@ -160,8 +160,8 @@ function resolveOpenAISize(
 import { type NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 import sharp from "sharp";
-import { auth } from "@/lib/auth";
-import { outpaintImage } from "@/lib/outpaint";
+import { auth } from "@src/lib/auth";
+import { outpaintImage } from "@src/lib/outpaint";
 
 interface OutpaintResponse {
   url: string;
@@ -320,7 +320,7 @@ const result = await response.json();
 ### Server-side (lib function)
 
 ```typescript
-import { outpaintImage } from "@/lib/outpaint";
+import { outpaintImage } from "@src/lib/outpaint";
 import fs from "node:fs";
 
 const imageBuffer = fs.readFileSync("photo.jpg");

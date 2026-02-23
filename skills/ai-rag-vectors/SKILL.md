@@ -17,7 +17,7 @@ Vector embedding layer that chunks parsed PDF pages, generates embeddings via AI
 
 - Next.js app with `src/` directory and App Router
 - `db` skill installed (Drizzle ORM + Postgres)
-- `ai-core` skill installed (`getModel()` at `@/lib/ai`)
+- `ai-core` skill installed (`getModel()` at `@src/lib/ai`)
 - `ai-rag-ingest` skill installed (`document` + `documentPage` tables in `@/db/schema/rag`)
 - Docker running with PostgreSQL
 
@@ -260,8 +260,8 @@ export function chunkPages(pageTexts: string[]): Chunk[] {
 ```typescript
 import { embed, embedMany } from "ai";
 import { gateway } from "@ai-sdk/gateway";
-import { db } from "@/lib/db";
-import { documentPage, documentChunk, document } from "@/lib/db/schema/rag";
+import { db } from "@src/lib/db";
+import { documentPage, documentChunk, document } from "@src/lib/db/schema/rag";
 import { eq } from "drizzle-orm";
 import { chunkPages } from "./chunker";
 
@@ -361,8 +361,8 @@ export async function indexDocument(documentId: string): Promise<number> {
 
 ```typescript
 import { sql, and, inArray } from "drizzle-orm";
-import { db } from "@/lib/db";
-import { documentChunk, document } from "@/lib/db/schema/rag";
+import { db } from "@src/lib/db";
+import { documentChunk, document } from "@src/lib/db/schema/rag";
 import { embedText } from "./embeddings";
 
 type SearchResult = {
@@ -443,11 +443,11 @@ export async function searchChunks(options: SearchOptions): Promise<SearchResult
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
-import { document } from "@/lib/db/schema/rag";
+import { withAuth } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
+import { document } from "@src/lib/db/schema/rag";
 import { eq, and } from "drizzle-orm";
-import { indexDocument } from "@/lib/rag/embeddings";
+import { indexDocument } from "@src/lib/rag/embeddings";
 
 /** POST /api/rag/documents/[documentId]/index — trigger embedding indexing */
 export const POST = withAuth(async (request: NextRequest, { user }) => {
@@ -488,8 +488,8 @@ export const POST = withAuth(async (request: NextRequest, { user }) => {
 
 ```typescript
 import { NextResponse } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
-import { searchChunks } from "@/lib/rag/search";
+import { withAuth } from "@src/lib/auth-guard";
+import { searchChunks } from "@src/lib/rag/search";
 
 type SearchBody = {
   query: string;
@@ -547,8 +547,8 @@ const { results } = await res.json();
 ### Programmatic Usage
 
 ```typescript
-import { indexDocument } from "@/lib/rag/embeddings";
-import { searchChunks } from "@/lib/rag/search";
+import { indexDocument } from "@src/lib/rag/embeddings";
+import { searchChunks } from "@src/lib/rag/search";
 
 // Index
 const count = await indexDocument("doc-uuid");

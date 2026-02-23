@@ -38,31 +38,31 @@ open http://localhost:3000/admin/content
 
 ### API Routes
 
-2. **`src/app/api/cms/posts/route.ts`** — List and create posts
-3. **`src/app/api/cms/posts/[id]/route.ts`** — Get, update, delete a post
-4. **`src/app/api/cms/pages/route.ts`** — List and create pages
-5. **`src/app/api/cms/pages/[id]/route.ts`** — Get, update, delete a page
-6. **`src/app/api/cms/categories/route.ts`** — List, create, update, delete categories
+1. **`src/app/api/cms/posts/route.ts`** — List and create posts
+2. **`src/app/api/cms/posts/[id]/route.ts`** — Get, update, delete a post
+3. **`src/app/api/cms/pages/route.ts`** — List and create pages
+4. **`src/app/api/cms/pages/[id]/route.ts`** — Get, update, delete a page
+5. **`src/app/api/cms/categories/route.ts`** — List, create, update, delete categories
 
 ### Components
 
-7. **`src/components/cms/tiptap-editor.tsx`** — Rich text editor with toolbar
-8. **`src/components/cms/media-picker.tsx`** — Image/video picker dialog using storage
-9. **`src/components/cms/post-form.tsx`** — Post create/edit form
-10. **`src/components/cms/page-form.tsx`** — Page create/edit form
+1. **`src/components/cms/tiptap-editor.tsx`** — Rich text editor with toolbar
+2. **`src/components/cms/media-picker.tsx`** — Image/video picker dialog using storage
+3. **`src/components/cms/post-form.tsx`** — Post create/edit form
+4. **`src/components/cms/page-form.tsx`** — Page create/edit form
 
 ### Admin Pages
 
-11. **`src/app/admin/content/layout.tsx`** — Admin sidebar layout
-12. **`src/app/admin/content/page.tsx`** — Content dashboard
-13. **`src/app/admin/content/posts/page.tsx`** — Posts list
-14. **`src/app/admin/content/posts/new/page.tsx`** — Create post
-15. **`src/app/admin/content/posts/[id]/page.tsx`** — Edit post
-16. **`src/app/admin/content/pages/page.tsx`** — Pages list
-17. **`src/app/admin/content/pages/new/page.tsx`** — Create page
-18. **`src/app/admin/content/pages/[id]/page.tsx`** — Edit page
-19. **`src/app/admin/content/categories/page.tsx`** — Categories management
-20. **`src/app/admin/content/media/page.tsx`** — Media management (wraps storage-ui)
+1. **`src/app/admin/content/layout.tsx`** — Admin sidebar layout
+2. **`src/app/admin/content/page.tsx`** — Content dashboard
+3. **`src/app/admin/content/posts/page.tsx`** — Posts list
+4. **`src/app/admin/content/posts/new/page.tsx`** — Create post
+5. **`src/app/admin/content/posts/[id]/page.tsx`** — Edit post
+6. **`src/app/admin/content/pages/page.tsx`** — Pages list
+7. **`src/app/admin/content/pages/new/page.tsx`** — Create page
+8. **`src/app/admin/content/pages/[id]/page.tsx`** — Edit page
+9. **`src/app/admin/content/categories/page.tsx`** — Categories management
+10. **`src/app/admin/content/media/page.tsx`** — Media management (wraps storage-ui)
 
 ### Modified Files
 
@@ -82,6 +82,7 @@ Before using this skill:
 This skill uses `src/` prefix paths (standard Next.js with `--src-dir`).
 
 **If your project uses `--no-src-dir`:**
+
 - Replace `src/lib/` with `lib/`
 - Replace `src/app/` with `app/`
 - Replace `src/components/` with `components/`
@@ -235,9 +236,9 @@ Add to your `src/app/globals.css` (after the existing `@import "tailwindcss";`):
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { withAdmin } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
-import { posts, postsToCategories, categories } from "@/lib/db/schema/cms";
+import { withAdmin } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
+import { posts, postsToCategories, categories } from "@src/lib/db/schema/cms";
 import { desc, eq, ilike, sql, and, inArray } from "drizzle-orm";
 
 export const GET = withAdmin(async (request) => {
@@ -319,10 +320,10 @@ export const POST = withAdmin(async (request, { user }) => {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
-import { posts, postsToCategories } from "@/lib/db/schema/cms";
+import { db } from "@src/lib/db";
+import { posts, postsToCategories } from "@src/lib/db/schema/cms";
 import { eq } from "drizzle-orm";
-import { getServerSession } from "@/lib/auth-guard";
+import { getServerSession } from "@src/lib/auth-guard";
 
 type RouteParams = { params: Promise<{ id: string }> };
 
@@ -423,9 +424,9 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { withAdmin } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
-import { pages } from "@/lib/db/schema/cms";
+import { withAdmin } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
+import { pages } from "@src/lib/db/schema/cms";
 import { desc, eq, ilike, sql, and } from "drizzle-orm";
 
 export const GET = withAdmin(async (request) => {
@@ -494,10 +495,10 @@ export const POST = withAdmin(async (request) => {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
-import { pages } from "@/lib/db/schema/cms";
+import { db } from "@src/lib/db";
+import { pages } from "@src/lib/db/schema/cms";
 import { eq } from "drizzle-orm";
-import { getServerSession } from "@/lib/auth-guard";
+import { getServerSession } from "@src/lib/auth-guard";
 
 type RouteParams = { params: Promise<{ id: string }> };
 
@@ -576,9 +577,9 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { withAdmin } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
-import { categories } from "@/lib/db/schema/cms";
+import { withAdmin } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
+import { categories } from "@src/lib/db/schema/cms";
 import { eq, asc } from "drizzle-orm";
 
 export const GET = withAdmin(async () => {
@@ -660,7 +661,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 import {
   TextB,
   TextItalic,
@@ -870,7 +871,7 @@ export function insertImageIntoEditor(
 "use client";
 
 import { useCallback, useEffect, useId, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 import { ImageSquare, VideoCamera, Check, CircleNotch, UploadSimple } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import {
@@ -1588,7 +1589,7 @@ export function PageForm({ page, isEdit }: PageFormProps) {
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 import { FileText, File, Tag, ImageSquare, SquaresFour } from "@phosphor-icons/react";
 
 const navItems = [
@@ -2324,18 +2325,23 @@ bunx drizzle-kit migrate
 ## Troubleshooting
 
 ### Admin pages redirect to sign-in
+
 The proxy requires authentication and admin role. Make sure your user has `role: "admin"` in the database.
 
 ### Tiptap editor not rendering
+
 Ensure all Tiptap packages are installed. The editor is client-side only (`"use client"` directive required).
 
 ### Media picker shows no files
+
 Verify the storage skill is set up and `/api/storage` returns files. Check that Docker storage service is running.
 
 ### Database errors on post/page creation
+
 Run `bunx drizzle-kit push` to sync the CMS schema to your database.
 
 ### Categories not loading in post form
+
 The post form fetches categories from `/api/cms/categories`. Verify the API route exists and returns data.
 
 ## Acceptance Criteria

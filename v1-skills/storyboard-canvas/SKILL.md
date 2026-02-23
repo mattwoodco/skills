@@ -79,7 +79,7 @@ export type StoryboardCanvasProps = {
 ```typescript
 "use client"
 
-import type { ShotData } from "@/lib/storyboard/types"
+import type { ShotData } from "@src/lib/storyboard/types"
 import { Camera } from "@phosphor-icons/react"
 import { Handle, Position, type NodeProps } from "@xyflow/react"
 
@@ -159,7 +159,7 @@ function StatusDot({ status }: { status: ShotData["status"] }) {
 
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import type { ShotData } from "@/lib/storyboard/types"
+import type { ShotData } from "@src/lib/storyboard/types"
 import { ArrowCounterClockwise, X } from "@phosphor-icons/react"
 import { useId, useState } from "react"
 
@@ -318,7 +318,7 @@ export function ShotPanel({ shotId, data, onClose, onChange, onRegenerate }: Sho
 
 import { ShotPanel } from "@/components/storyboard/shot-panel"
 import { StoryboardNode } from "@/components/storyboard/storyboard-node"
-import type { ShotData, StoryboardCanvasProps, StoryboardEdge, StoryboardShot } from "@/lib/storyboard/types"
+import type { ShotData, StoryboardCanvasProps, StoryboardEdge, StoryboardShot } from "@src/lib/storyboard/types"
 import { Export, Link, VideoCamera } from "@phosphor-icons/react"
 import {
   Background,
@@ -496,7 +496,7 @@ export function StoryboardCanvas({
 
 ```typescript
 import { StoryboardCanvas } from "@/components/storyboard/storyboard-canvas"
-import type { ShotData } from "@/lib/storyboard/types"
+import type { ShotData } from "@src/lib/storyboard/types"
 import { useState } from "react"
 
 const INITIAL_SHOTS: ShotData[] = [

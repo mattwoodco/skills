@@ -138,9 +138,9 @@ export function getUserColor(userId: string): string {
 ```typescript
 import { NextResponse } from "next/server";
 import { Liveblocks } from "@liveblocks/node";
-import { auth } from "@/lib/auth";
+import { auth } from "@src/lib/auth";
 import { headers } from "next/headers";
-import { getUserColor } from "@/lib/realtime/types";
+import { getUserColor } from "@src/lib/realtime/types";
 
 const liveblocks = new Liveblocks({
   secret: process.env.LIVEBLOCKS_SECRET_KEY ?? "",

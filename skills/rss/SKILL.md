@@ -40,14 +40,14 @@ open http://localhost:3000/debug/rss
 
 ### Library Files
 
-4. **`src/lib/rss/generate.ts`** - Feed generation utilities
-5. **`src/lib/rss/types.ts`** - TypeScript types for feed items
-6. **`src/lib/rss/fetch-content.ts`** - CMS content fetching
+1. **`src/lib/rss/generate.ts`** - Feed generation utilities
+2. **`src/lib/rss/types.ts`** - TypeScript types for feed items
+3. **`src/lib/rss/fetch-content.ts`** - CMS content fetching
 
 ### Debug & Testing
 
-7. **`src/app/debug/rss/page.tsx`** - Feed preview and validation
-8. **`e2e/specs/rss.spec.ts`** - Playwright validation tests
+1. **`src/app/debug/rss/page.tsx`** - Feed preview and validation
+2. **`e2e/specs/rss.spec.ts`** - Playwright validation tests
 
 ## Installation
 
@@ -590,8 +590,8 @@ export const metadata: Metadata = {
 
 ```tsx
 import { Suspense } from "react";
-import { fetchFeedItems } from "@/lib/rss/fetch-content";
-import { generateRss, generateAtom, generateJson } from "@/lib/rss/generate";
+import { fetchFeedItems } from "@src/lib/rss/fetch-content";
+import { generateRss, generateAtom, generateJson } from "@src/lib/rss/generate";
 import { env } from "@/env";
 
 export const dynamic = "force-dynamic";
@@ -822,8 +822,8 @@ For projects using Elysia for API routes, add RSS endpoints:
 ```typescript
 // In src/app/api/[[...slugs]]/route.ts
 import { Elysia } from "elysia";
-import { generateRss, generateAtom, generateJson } from "@/lib/rss/generate";
-import { fetchFeedItems } from "@/lib/rss/fetch-content";
+import { generateRss, generateAtom, generateJson } from "@src/lib/rss/generate";
+import { fetchFeedItems } from "@src/lib/rss/fetch-content";
 
 const app = new Elysia({ prefix: "/api" })
   // ... existing routes
@@ -899,6 +899,7 @@ export default function robots(): MetadataRoute.Robots {
 ### 4. Cache Headers
 
 Route handlers include proper cache headers:
+
 - `Cache-Control: public, max-age=3600, s-maxage=3600` for 1-hour caching
 - Vercel Edge Cache automatically respected
 
@@ -988,13 +989,14 @@ test.describe("RSS Feeds", () => {
 4. Navigate to `http://localhost:3000/debug/rss`
 5. Verify feed statistics and preview
 6. Run Playwright tests: `bunx playwright test e2e/specs/rss.spec.ts`
-7. Validate at W3C: https://validator.w3.org/feed/
+7. Validate at W3C: <https://validator.w3.org/feed/>
 
 ## Troubleshooting
 
 ### Empty feeds
 
 Check that:
+
 1. Posts collection exists in Payload CMS
 2. Posts have `status: "published"`
 3. Posts have `publishedAt` date set
@@ -1016,6 +1018,7 @@ Check that:
 If feed routes timeout or hang:
 
 1. **Avoid `@/env` import in route handlers** - The t3-env validation can block if DATABASE_URL or other required vars aren't ready. Use `process.env` directly with fallbacks:
+
    ```typescript
    // ❌ Don't use - can block on env validation
    import { env } from "@/env";
@@ -1026,6 +1029,7 @@ If feed routes timeout or hang:
    ```
 
 2. **Use dynamic imports for Payload** - Prevents blocking if database isn't available:
+
    ```typescript
    const { getPayload } = await import("payload");
    const config = await import("@payload-config").then((m) => m.default);
@@ -1034,6 +1038,7 @@ If feed routes timeout or hang:
 ### Feedsmith type errors
 
 **RSS guid format**: The `guid` field requires an object, not a string:
+
 ```typescript
 // ❌ Incorrect - TypeScript error
 guid: `${siteUrl}/blog/${item.slug}`,
@@ -1046,6 +1051,7 @@ guid: {
 ```
 
 **Atom content is a plain string**: feedsmith's Atom `Entry.content` is typed as `Text` (alias for `string`), not an object:
+
 ```typescript
 // ❌ Incorrect - TypeScript error
 content: { type: "html", value: item.content }
@@ -1055,6 +1061,7 @@ content: item.content,
 ```
 
 **JSON Feed dates must be Date objects**: `generateJsonFeed` types `date_published`/`date_modified` as `Date`, not ISO strings:
+
 ```typescript
 // ❌ Incorrect - TypeScript error
 date_published: item.publishedAt.toISOString(),
@@ -1064,6 +1071,7 @@ date_published: item.publishedAt,
 ```
 
 **JSON Feed returns object**: `generateJsonFeed` returns an object, not a string. Stringify it:
+
 ```typescript
 const feed = generateJsonFeed({ ... });
 
@@ -1076,6 +1084,7 @@ return new Response(feedString, { ... });
 ```
 
 **JSON Feed `version` is not a valid property**: feedsmith's `Json.Feed<TDate>` type does not include a `version` field — the library adds it automatically:
+
 ```typescript
 // ❌ Incorrect - TypeScript error "version does not exist in type Feed<Date>"
 const feed = generateJsonFeed({ version: "https://jsonfeed.org/version/1.1", title: ... });
@@ -1087,6 +1096,7 @@ const feed = generateJsonFeed({ title: ... });
 ### Payload CMS id type
 
 Payload returns `id` as a number, but feed items need strings:
+
 ```typescript
 // ❌ Type error - number vs string
 id: post.id,
@@ -1098,6 +1108,7 @@ id: String(post.id),
 ### Playwright test errors
 
 If Playwright tests fail with tsconfig errors, exclude the e2e folder:
+
 ```json
 // tsconfig.json
 {
@@ -1106,11 +1117,13 @@ If Playwright tests fail with tsconfig errors, exclude the e2e folder:
 ```
 
 For auth-protected debug pages, use empty storage state:
+
 ```typescript
 test.use({ storageState: { cookies: [], origins: [] } });
 ```
 
 **Strict mode violations**: When text appears multiple times, use exact matching:
+
 ```typescript
 // ❌ Fails if "RSS 2.0" appears in "RSS 2.0" and "RSS 2.0 Preview"
 await expect(page.getByText("RSS 2.0")).toBeVisible();
@@ -1120,6 +1133,7 @@ await expect(page.getByText("RSS 2.0", { exact: true })).toBeVisible();
 ```
 
 **Client-side loading**: Debug page uses client-side fetching. Add longer timeouts:
+
 ```typescript
 await expect(page.getByText("Feed URLs")).toBeVisible({ timeout: 15000 });
 ```

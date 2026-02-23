@@ -78,7 +78,7 @@ export type MyAgentUIMessage = InferAgentUIMessage<typeof myAgent, MyMetadata>;
 ```tsx
 // app/chat.tsx
 import { useChat } from '@ai-sdk/react';
-import type { MyAgentUIMessage } from '@/lib/agents/my-agent';
+import type { MyAgentUIMessage } from '@src/lib/agents/my-agent';
 
 export function Chat() {
   const { messages } = useChat<MyAgentUIMessage>();
@@ -159,7 +159,7 @@ Then import only the type in your component:
 
 ```tsx
 // components/weather-tool.tsx
-import type { WeatherToolInvocation } from '@/lib/tools/weather-tool';
+import type { WeatherToolInvocation } from '@src/lib/tools/weather-tool';
 
 export function WeatherToolComponent({
   invocation,

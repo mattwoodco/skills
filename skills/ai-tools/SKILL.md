@@ -37,6 +37,7 @@ src/
 ```
 
 Plus modification to:
+
 ```
 src/app/api/ai/chat/route.ts    # MODIFIED — spread allTools into tools object
 ```
@@ -411,7 +412,7 @@ import {
   type ToolSet,
   type JSONValue,
 } from "ai";
-import { getModel } from "@/lib/ai";
+import { getModel } from "@src/lib/ai";
 ```
 
 Replace with:
@@ -424,8 +425,8 @@ import {
   type ToolSet,
   type JSONValue,
 } from "ai";
-import { getModel } from "@/lib/ai";
-import { allTools } from "@/lib/ai/tools";
+import { getModel } from "@src/lib/ai";
+import { allTools } from "@src/lib/ai/tools";
 ```
 
 ### Step 5: Modify `src/components/ai/message.tsx`

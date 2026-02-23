@@ -56,6 +56,7 @@ After initialization, **always** post-process the `.dark` theme block in `global
 **Rule:** Every oklch color in the `.dark {}` block that represents a **neutral gray** (background, card, popover, muted, accent, secondary, sidebar, ring, foreground) must have **chroma set to 0**. Only accent colors like `--primary`, `--destructive`, and `--chart-*` should retain chroma.
 
 For example, if shadcn generates:
+
 ```css
 .dark {
   --background: oklch(0.13 0.028 261.692);
@@ -66,6 +67,7 @@ For example, if shadcn generates:
 ```
 
 Post-process to:
+
 ```css
 .dark {
   --background: oklch(0.13 0 0);
@@ -90,15 +92,18 @@ shadcn/ui supports multiple component registries beyond the official library. Th
 ### Recommended Registries
 
 **React Bits** - Animated and interactive components
-- URL: https://reactbits.dev/
+
+- URL: <https://reactbits.dev/>
 - Installation: `npx shadcn add @react-bits/<component>`
 
 **ElevenLabs UI** - Agent and audio components
-- URL: https://ui.elevenlabs.io/
+
+- URL: <https://ui.elevenlabs.io/>
 - Installation: `npx shadcn add @elevenlabs-ui/<component>`
 
 **MapCN** - Map components built on MapLibre
-- URL: https://mapcn.dev/
+
+- URL: <https://mapcn.dev/>
 - Installation: `npx shadcn add @mapcn/<component>`
 
 ### Configure Custom Registries
@@ -146,6 +151,7 @@ bunx shadcn@latest add @mapcn/map-viewer
 The shadcn MCP server enables AI-assisted component discovery and installation using natural language.
 
 **Setup:**
+
 ```bash
 # Install shadcn MCP server (if using Claude Code or compatible IDE)
 # Configuration is typically added to your MCP settings
@@ -153,11 +159,13 @@ The shadcn MCP server enables AI-assisted component discovery and installation u
 
 **Usage:**
 Ask your AI assistant to find and install components:
+
 - "Find me a login form from the shadcn registry"
 - "Install an animated card component from React Bits"
 - "Add a map component for displaying locations"
 
 The MCP server works with:
+
 - Official shadcn/ui registry
 - Third-party component libraries (React Bits, ElevenLabs UI, MapCN, etc.)
 - Private company registries (requires authentication via `.env.local`)
@@ -384,7 +392,7 @@ When using shadcn with **Base UI** (not Radix), several component APIs differ. B
 
 ```tsx
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 
 // WRONG - asChild not supported
 <Button asChild variant="outline" size="sm">

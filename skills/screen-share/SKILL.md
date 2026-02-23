@@ -135,7 +135,7 @@ export function useScreenShare(): UseScreenShareReturn {
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useScreenShare } from "@/lib/video/use-screen-share";
+import { useScreenShare } from "@src/lib/video/use-screen-share";
 
 type ScreenShareButtonProps = {
   className?: string;
@@ -446,7 +446,7 @@ function CustomControls() {
 "use client";
 
 import { ScreenShareView } from "@/components/video/screen-share-view";
-import { useScreenShare } from "@/lib/video/use-screen-share";
+import { useScreenShare } from "@src/lib/video/use-screen-share";
 
 function FullScreenPresentation() {
   const { isScreenSharing, screenShareTrack } = useScreenShare();
@@ -471,7 +471,7 @@ function FullScreenPresentation() {
 ```tsx
 "use client";
 
-import { useScreenShare } from "@/lib/video/use-screen-share";
+import { useScreenShare } from "@src/lib/video/use-screen-share";
 
 function ScreenShareStatus() {
   const {
@@ -550,6 +550,7 @@ function ScreenShareStatus() {
 **Cause**: The browser may block the `getDisplayMedia` call if it is not triggered by a user gesture, or permissions may be denied.
 
 **Fix**:
+
 1. Ensure the screen share toggle is called directly from a click handler (not from an async chain without user gesture)
 2. Check browser permissions in system settings (macOS: System Settings > Privacy & Security > Screen Recording)
 3. On macOS, the browser must have screen recording permission
@@ -585,6 +586,7 @@ function ScreenShareStatus() {
 **Cause**: The track may not be attached to the video element, or the track source is paused.
 
 **Fix**:
+
 1. Verify the track is being attached in the `useEffect` (check console for errors)
 2. Ensure the screen share source window/tab is not minimized
 3. Some browsers pause screen share tracks when the shared tab is not visible

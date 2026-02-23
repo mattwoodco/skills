@@ -11,6 +11,7 @@ Validation runs in up to 5 tiers, depending on the skill type and project config
 ### Tier 1 — TypeScript Compilation (Always Run)
 
 **Command:**
+
 ```bash
 cd sandbox && bunx tsc --noEmit 2>&1
 ```
@@ -24,6 +25,7 @@ cd sandbox && bunx tsc --noEmit 2>&1
 ### Tier 2 — Linting (Run if Linter is Configured)
 
 **Commands:**
+
 ```bash
 # If biome is installed:
 cd sandbox && bunx biome check . 2>&1
@@ -41,6 +43,7 @@ cd sandbox && bunx eslint . 2>&1
 ### Tier 3 — Build (Run if Build Script Exists)
 
 **Command:**
+
 ```bash
 cd sandbox && bun run build 2>&1
 ```
@@ -54,6 +57,7 @@ cd sandbox && bun run build 2>&1
 ### Tier 4 — Browser Validation (Run if Skill Has a Test Page)
 
 **Commands:**
+
 ```bash
 # Start dev server in background
 cd sandbox && bun run dev &
@@ -75,6 +79,7 @@ playwright-cli eval "document.title"                     → assert page state v
 ```
 
 Full validation sequence:
+
 1. Navigate to the test route defined in the skill's TEST_PAGE.md
 2. Take a snapshot — verify key elements are present
 3. Read console messages — fail if any `error` level messages exist
@@ -97,6 +102,7 @@ kill $DEV_PID
 ### Tier 5 — Test Writing (Run After Tiers 1-4 Pass)
 
 **Commands:**
+
 ```bash
 # Run existing tests
 cd sandbox && bun test 2>&1
@@ -108,6 +114,7 @@ cd sandbox && bunx vitest run 2>&1
 **Purpose:** Write and run tests for the skill's code after the implementation passes all other tiers.
 
 **Test types:**
+
 - **Unit tests** (`__tests__/unit/`): Utility functions, lib helpers, validators, formatters
 - **Integration tests** (`__tests__/integration/`): API routes, database queries, auth flows
 - **Component/E2E tests** (`__tests__/e2e/`): UI pages, user flows via playwright-cli
@@ -115,6 +122,7 @@ cd sandbox && bunx vitest run 2>&1
 **When to run:** After Tiers 1-4 pass cleanly. Test failures feed back into the same reflection loop — classify as `test-failure` errors in the VALIDATION_ERRORS structure and update the skill markdown accordingly.
 
 **Error collection:**
+
 ```
 VALIDATION_ERRORS = [
   { source: "test", file: "__tests__/unit/auth.test.ts", line: 15, message: "Expected signIn to return session, got undefined" },
@@ -143,7 +151,7 @@ All errors from validation tiers should be collected into a structured list:
 ```
 VALIDATION_ERRORS = [
   { source: "tsc", file: "src/lib/auth.tsx", line: 42, message: "Property 'foo' does not exist on type 'Bar'" },
-  { source: "build", file: "src/components/nav.tsx", line: 10, message: "Module not found: '@/lib/missing'" },
+  { source: "build", file: "src/components/nav.tsx", line: 10, message: "Module not found: '@src/lib/missing'" },
   ...
 ]
 ```

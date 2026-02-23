@@ -18,8 +18,8 @@ A document is a collection of typed sections. Each section has: title, type, con
 
 - Next.js app with `src/` directory and App Router
 - `add-shadcn` skill installed (shadcn/ui components available)
-- `db` skill installed (Drizzle ORM at `@/lib/db`, Postgres running)
-- `auth` skill installed (`withAuth` available at `@/lib/auth-guard`)
+- `db` skill installed (Drizzle ORM at `@src/lib/db`, Postgres running)
+- `auth` skill installed (`withAuth` available at `@src/lib/auth-guard`)
 
 ## Installation
 
@@ -279,9 +279,9 @@ export * from "./document";
 
 ```typescript
 import { NextResponse } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
-import { specDocument } from "@/lib/db/schema/document";
+import { withAuth } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
+import { specDocument } from "@src/lib/db/schema/document";
 import { eq, desc } from "drizzle-orm";
 
 type DocumentListItem = {
@@ -338,14 +338,14 @@ export const POST = withAuth(async (request, { user }) => {
 ```typescript
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
+import { withAuth } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
 import {
   specDocument,
   specSection,
   specAnnotation,
   type DocumentStatus,
-} from "@/lib/db/schema/document";
+} from "@src/lib/db/schema/document";
 import { eq, and, asc } from "drizzle-orm";
 
 type RouteContext = { params: Promise<{ documentId: string }> };
@@ -473,14 +473,14 @@ export const DELETE = withAuth(async (request: NextRequest, { user }) => {
 ```typescript
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
+import { withAuth } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
 import {
   specDocument,
   specSection,
   type SectionType,
   type SectionContent,
-} from "@/lib/db/schema/document";
+} from "@src/lib/db/schema/document";
 import { eq, and, asc } from "drizzle-orm";
 
 type RouteContext = { params: Promise<{ documentId: string }> };
@@ -595,14 +595,14 @@ function getDefaultContent(type: SectionType): SectionContent {
 ```typescript
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
+import { withAuth } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
 import {
   specDocument,
   specSection,
   type SectionContent,
   type SectionStatus,
-} from "@/lib/db/schema/document";
+} from "@src/lib/db/schema/document";
 import { eq, and } from "drizzle-orm";
 
 type RouteContext = {
@@ -733,13 +733,13 @@ export const DELETE = withAuth(async (request: NextRequest, { user }) => {
 ```typescript
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
+import { withAuth } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
 import {
   specDocument,
   specSection,
   specAnnotation,
-} from "@/lib/db/schema/document";
+} from "@src/lib/db/schema/document";
 import { eq, and, asc } from "drizzle-orm";
 
 type RouteContext = {
@@ -880,7 +880,7 @@ import {
   ArrowDown,
   ChatCircle,
 } from "@phosphor-icons/react";
-import type { SectionStatus } from "@/lib/db/schema/document";
+import type { SectionStatus } from "@src/lib/db/schema/document";
 
 type SectionToolbarProps = {
   status: SectionStatus;
@@ -1009,7 +1009,7 @@ import type {
   OpenQuestionsContent,
   OpenQuestionItem,
   CustomContent,
-} from "@/lib/db/schema/document";
+} from "@src/lib/db/schema/document";
 
 type SectionContentProps = {
   type: SectionType;
@@ -2116,7 +2116,7 @@ import type {
   SectionType,
   SectionContent as SectionContentType,
   SectionStatus,
-} from "@/lib/db/schema/document";
+} from "@src/lib/db/schema/document";
 
 type Annotation = {
   id: string;
@@ -2347,7 +2347,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Plus } from "@phosphor-icons/react";
-import type { SectionType } from "@/lib/db/schema/document";
+import type { SectionType } from "@src/lib/db/schema/document";
 
 type AddSectionButtonProps = {
   onAdd: (type: SectionType, title: string) => void;
@@ -2458,7 +2458,7 @@ import type {
   SectionContent as SectionContentType,
   SectionStatus,
   DocumentStatus,
-} from "@/lib/db/schema/document";
+} from "@src/lib/db/schema/document";
 
 type Annotation = {
   id: string;
@@ -2778,11 +2778,13 @@ export function DocumentEditor({ documentId }: DocumentEditorProps) {
 After applying this skill:
 
 1. Push the database schema:
+
    ```bash
    bunx drizzle-kit push
    ```
 
 2. Use the `<DocumentEditor>` component in any page:
+
    ```tsx
    import { DocumentEditor } from "@/components/editor/document-editor";
 

@@ -18,7 +18,7 @@ Business owners configure widget appearance (colors, greeting, position) from an
 
 - Next.js app with `src/` directory and App Router
 - `ai-chat` skill installed (streaming chat route, message components)
-- `auth` skill installed (`withAuth` at `@/lib/auth-guard`, Drizzle DB at `@/db`)
+- `auth` skill installed (`withAuth` at `@src/lib/auth-guard`, Drizzle DB at `@/db`)
 - `docker` skill installed (PostgreSQL running)
 - shadcn/ui initialized
 
@@ -119,7 +119,7 @@ export * from "./widget";
 
 ```typescript
 import { NextResponse } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
+import { withAuth } from "@src/lib/auth-guard";
 import { db } from "@/db";
 import { widgetConfig } from "@/db/schema/widget";
 import { eq, desc } from "drizzle-orm";
@@ -189,7 +189,7 @@ export const POST = withAuth(async (request, { user }) => {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
+import { withAuth } from "@src/lib/auth-guard";
 import { db } from "@/db";
 import { widgetConfig, type WidgetAppearance } from "@/db/schema/widget";
 import { eq, and } from "drizzle-orm";
@@ -283,7 +283,7 @@ import {
   convertToModelMessages,
   type UIMessage,
 } from "ai";
-import { getModel } from "@/lib/ai";
+import { getModel } from "@src/lib/ai";
 import { db } from "@/db";
 import { widgetConfig } from "@/db/schema/widget";
 import { eq } from "drizzle-orm";

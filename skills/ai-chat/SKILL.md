@@ -15,8 +15,8 @@ Complete streaming chat with Postgres persistence, session management, and a com
 ## Prerequisites
 
 - Next.js app with `src/` directory and App Router
-- `ai-core` skill installed (`getModel()` available at `@/lib/ai`)
-- `auth` skill installed (`withAuth` available at `@/lib/auth-guard`, Drizzle DB at `@/lib/db`)
+- `ai-core` skill installed (`getModel()` available at `@src/lib/ai`)
+- `auth` skill installed (`withAuth` available at `@src/lib/auth-guard`, Drizzle DB at `@src/lib/db`)
 - `docker` skill installed (PostgreSQL running)
 - shadcn/ui initialized
 
@@ -113,10 +113,10 @@ This is the core streaming endpoint. It includes clearly commented insertion poi
 
 ```typescript
 import { streamText, convertToModelMessages, type UIMessage, type ToolSet, type JSONValue } from "ai";
-import { getModel } from "@/lib/ai";
-import { withAuth } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
-import { chatSession, chatMessage } from "@/lib/db/schema/chat";
+import { getModel } from "@src/lib/ai";
+import { withAuth } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
+import { chatSession, chatMessage } from "@src/lib/db/schema/chat";
 import { eq, and } from "drizzle-orm";
 
 export const POST = withAuth(async (request, { user }) => {
@@ -230,9 +230,9 @@ export const POST = withAuth(async (request, { user }) => {
 
 ```typescript
 import { NextResponse } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
-import { chatSession } from "@/lib/db/schema/chat";
+import { withAuth } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
+import { chatSession } from "@src/lib/db/schema/chat";
 import { eq, desc } from "drizzle-orm";
 
 type SessionListItem = {
@@ -281,9 +281,9 @@ export const POST = withAuth(async (request, { user }) => {
 ```typescript
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
-import { db } from "@/lib/db";
-import { chatSession, chatMessage } from "@/lib/db/schema/chat";
+import { withAuth } from "@src/lib/auth-guard";
+import { db } from "@src/lib/db";
+import { chatSession, chatMessage } from "@src/lib/db/schema/chat";
 import { eq, and, asc } from "drizzle-orm";
 
 type RouteContext = { params: Promise<{ sessionId: string }> };
@@ -382,7 +382,7 @@ export const DELETE = withAuth(async (request: NextRequest, { user }) => {
 ### Step 6: Create `src/components/ai/loader.tsx`
 
 ```tsx
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 
 type LoaderProps = {
   className?: string;
@@ -437,7 +437,7 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
 
 ```tsx
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 
 type ChatContainerProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -458,7 +458,7 @@ ChatContainer.displayName = "ChatContainer";
 ```tsx
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 
 type PromptInputProps = {
   value: string;
@@ -661,7 +661,7 @@ This is the message renderer with a part switch. Downstream skills add cases at 
 import { memo, useId } from "react";
 import type { ReactNode } from "react";
 import type { UIMessage } from "ai";
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 import { Markdown } from "@/components/ai/markdown";
 
 type MessageProps = {
@@ -1005,6 +1005,7 @@ export default function ChatLoading() {
 After applying this skill:
 
 1. Push the database schema:
+
    ```bash
    bunx drizzle-kit push
    ```

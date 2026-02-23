@@ -289,7 +289,7 @@ export async function generateVideoWithFal(params: {
 import { getVideoModelConfig } from "./models";
 import { generateVideoWithReplicate } from "./providers/replicate";
 import { generateVideoWithFal } from "./providers/fal";
-import { getStorageProvider } from "@/lib/storage/storage-provider";
+import { getStorageProvider } from "@src/lib/storage/storage-provider";
 import type { VideoGenRequest, VideoGenResult } from "./types";
 
 export async function generateVideo(
@@ -356,11 +356,11 @@ export async function generateVideo(
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
-import { videoGenerations } from "@/lib/db/schema";
+import { db } from "@src/lib/db";
+import { videoGenerations } from "@src/lib/db/schema";
 import { eq, desc } from "drizzle-orm";
-import { generateVideo } from "@/lib/ai/video-gen/generate";
-import { auth } from "@/lib/auth";
+import { generateVideo } from "@src/lib/ai/video-gen/generate";
+import { auth } from "@src/lib/auth";
 import { headers } from "next/headers";
 
 const generateSchema = z.object({
@@ -462,10 +462,10 @@ export async function GET(request: Request) {
 
 ```typescript
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
-import { videoGenerations } from "@/lib/db/schema";
+import { db } from "@src/lib/db";
+import { videoGenerations } from "@src/lib/db/schema";
 import { eq, and } from "drizzle-orm";
-import { auth } from "@/lib/auth";
+import { auth } from "@src/lib/auth";
 import { headers } from "next/headers";
 
 export async function GET(

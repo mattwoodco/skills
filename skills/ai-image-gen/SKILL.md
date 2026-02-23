@@ -318,7 +318,7 @@ export async function generateWithFal(params: {
 import { getModelConfig } from "./models";
 import { generateWithReplicate } from "./providers/replicate";
 import { generateWithFal } from "./providers/fal";
-import { getStorageProvider } from "@/lib/storage/storage-provider";
+import { getStorageProvider } from "@src/lib/storage/storage-provider";
 import type { ImageGenRequest, ImageGenResult } from "./types";
 
 export async function generateImage(
@@ -397,11 +397,11 @@ export async function generateImage(
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
-import { generations } from "@/lib/db/schema";
+import { db } from "@src/lib/db";
+import { generations } from "@src/lib/db/schema";
 import { eq, desc } from "drizzle-orm";
-import { generateImage } from "@/lib/ai/image-gen/generate";
-import { withAuth } from "@/lib/auth-guard";
+import { generateImage } from "@src/lib/ai/image-gen/generate";
+import { withAuth } from "@src/lib/auth-guard";
 
 const generateSchema = z.object({
   prompt: z.string().min(1).max(2000),
@@ -497,10 +497,10 @@ export const GET = withAuth(async (request, { user }) => {
 ```typescript
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { db } from "@/lib/db";
-import { generations } from "@/lib/db/schema";
+import { db } from "@src/lib/db";
+import { generations } from "@src/lib/db/schema";
 import { eq, and } from "drizzle-orm";
-import { withAuth } from "@/lib/auth-guard";
+import { withAuth } from "@src/lib/auth-guard";
 
 export const GET = withAuth(async (request: NextRequest, { user }) => {
   // Extract ID from URL since withAuth wraps the route context

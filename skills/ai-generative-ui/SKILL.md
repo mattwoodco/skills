@@ -131,7 +131,7 @@ export type { GenUIProps, GenUIComponent };
 "use client";
 
 import { memo } from "react";
-import { registerUIComponent, type GenUIProps } from "@/lib/ai/ui-registry";
+import { registerUIComponent, type GenUIProps } from "@src/lib/ai/ui-registry";
 
 type WeatherData = {
   location: string;
@@ -302,7 +302,7 @@ export { WeatherCard };
 "use client";
 
 import { useId, memo } from "react";
-import { registerUIComponent, type GenUIProps } from "@/lib/ai/ui-registry";
+import { registerUIComponent, type GenUIProps } from "@src/lib/ai/ui-registry";
 
 type DataCardData = {
   title: string;
@@ -376,7 +376,7 @@ export { DataCard };
 "use client";
 
 import { useState, useCallback, memo } from "react";
-import { registerUIComponent, type GenUIProps } from "@/lib/ai/ui-registry";
+import { registerUIComponent, type GenUIProps } from "@src/lib/ai/ui-registry";
 
 type ConfirmationData = {
   title: string;
@@ -567,7 +567,7 @@ Replace with:
 
 ```typescript
 import { useId } from "react";
-import { hasUIComponent, getUIComponent } from "@/lib/ai/ui-registry";
+import { hasUIComponent, getUIComponent } from "@src/lib/ai/ui-registry";
 // [ai-generative-ui]: import gen-ui components to trigger registration
 import "@/components/ai/gen-ui/weather-card";
 import "@/components/ai/gen-ui/data-card";
@@ -704,7 +704,7 @@ To create a new generative UI component:
 ```tsx
 "use client";
 
-import { registerUIComponent, type GenUIProps } from "@/lib/ai/ui-registry";
+import { registerUIComponent, type GenUIProps } from "@src/lib/ai/ui-registry";
 
 type StockData = {
   symbol: string;
@@ -733,13 +733,13 @@ registerUIComponent("StockCard", StockCard as unknown as React.ComponentType<Gen
 export { StockCard };
 ```
 
-2. **Import the component** in `message.tsx` to trigger registration:
+1. **Import the component** in `message.tsx` to trigger registration:
 
 ```typescript
 import "@/components/ai/gen-ui/stock-card";
 ```
 
-3. **Return `_ui` from the tool** in your tool's `execute` function:
+1. **Return `_ui` from the tool** in your tool's `execute` function:
 
 ```typescript
 return { symbol: "AAPL", price: 182.5, change: 3.2, changePercent: 1.78, _ui: "StockCard" };

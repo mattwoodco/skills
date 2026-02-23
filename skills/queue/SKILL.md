@@ -136,9 +136,9 @@ export const inngest = new Inngest({
 ### Step 5: Create `src/lib/queue/functions/example-job.ts`
 
 ```typescript
-import { inngest } from "@/lib/queue/client";
-import { db } from "@/lib/db";
-import { jobs } from "@/lib/db/schema";
+import { inngest } from "@src/lib/queue/client";
+import { db } from "@src/lib/db";
+import { jobs } from "@src/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 export const exampleJob = inngest.createFunction(
@@ -204,8 +204,8 @@ export const exampleJob = inngest.createFunction(
 
 ```typescript
 import { serve } from "inngest/next";
-import { inngest } from "@/lib/queue/client";
-import { exampleJob } from "@/lib/queue/functions/example-job";
+import { inngest } from "@src/lib/queue/client";
+import { exampleJob } from "@src/lib/queue/functions/example-job";
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
@@ -218,11 +218,11 @@ export const { GET, POST, PUT } = serve({
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
-import { jobs } from "@/lib/db/schema";
+import { db } from "@src/lib/db";
+import { jobs } from "@src/lib/db/schema";
 import { eq, desc } from "drizzle-orm";
-import { inngest } from "@/lib/queue/client";
-import { auth } from "@/lib/auth";
+import { inngest } from "@src/lib/queue/client";
+import { auth } from "@src/lib/auth";
 import { headers } from "next/headers";
 
 const submitSchema = z.object({
@@ -287,10 +287,10 @@ export async function POST(request: Request) {
 
 ```typescript
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
-import { jobs } from "@/lib/db/schema";
+import { db } from "@src/lib/db";
+import { jobs } from "@src/lib/db/schema";
 import { eq, and } from "drizzle-orm";
-import { auth } from "@/lib/auth";
+import { auth } from "@src/lib/auth";
 import { headers } from "next/headers";
 
 export async function GET(
@@ -355,9 +355,9 @@ const status = await response.json();
 1. Create a new function in `src/lib/queue/functions/`:
 
 ```typescript
-import { inngest } from "@/lib/queue/client";
-import { db } from "@/lib/db";
-import { jobs } from "@/lib/db/schema";
+import { inngest } from "@src/lib/queue/client";
+import { db } from "@src/lib/db";
+import { jobs } from "@src/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 export const myCustomJob = inngest.createFunction(
@@ -370,10 +370,10 @@ export const myCustomJob = inngest.createFunction(
 );
 ```
 
-2. Add it to the serve endpoint in `src/app/api/inngest/route.ts`:
+1. Add it to the serve endpoint in `src/app/api/inngest/route.ts`:
 
 ```typescript
-import { myCustomJob } from "@/lib/queue/functions/my-custom-job";
+import { myCustomJob } from "@src/lib/queue/functions/my-custom-job";
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
@@ -381,7 +381,7 @@ export const { GET, POST, PUT } = serve({
 });
 ```
 
-3. Add the event type to `src/lib/queue/types.ts`:
+1. Add the event type to `src/lib/queue/types.ts`:
 
 ```typescript
 export type QueueEvents = {

@@ -42,6 +42,7 @@ src/
 ```
 
 Plus modifications to:
+
 ```
 src/app/api/ai/chat/route.ts      # MODIFIED — inject memories + spread memory tools
 src/db/schema/index.ts             # MODIFIED — re-export memory schema
@@ -249,7 +250,7 @@ import {
   getRelevantMemories,
   deleteMemoryRecord,
   listMemories,
-} from "@/lib/ai/memory";
+} from "@src/lib/ai/memory";
 
 interface SaveMemoryResult {
   key: string;
@@ -376,17 +377,17 @@ Add the memory imports at the top of the file.
 Find this in `src/app/api/ai/chat/route.ts`:
 
 ```typescript
-import { getModel } from "@/lib/ai";
-import { allTools } from "@/lib/ai/tools";
+import { getModel } from "@src/lib/ai";
+import { allTools } from "@src/lib/ai/tools";
 ```
 
 Replace with:
 
 ```typescript
-import { getModel } from "@/lib/ai";
-import { allTools } from "@/lib/ai/tools";
-import { getRelevantMemories } from "@/lib/ai/memory";
-import { createMemoryTools } from "@/lib/ai/tools/memory";
+import { getModel } from "@src/lib/ai";
+import { allTools } from "@src/lib/ai/tools";
+import { getRelevantMemories } from "@src/lib/ai/memory";
+import { createMemoryTools } from "@src/lib/ai/tools/memory";
 ```
 
 Inject relevant memories into the system prompt.

@@ -14,7 +14,7 @@ LiveKit-powered video room infrastructure with server-side room management, JWT 
 ## Prerequisites
 
 - Next.js app with `src/` directory and App Router
-- `auth` skill installed (`withAuth` available at `@/lib/auth-guard`)
+- `auth` skill installed (`withAuth` available at `@src/lib/auth-guard`)
 - `env-config` skill installed (`src/env.ts` with Zod schema)
 - LiveKit Cloud account or self-hosted LiveKit server
 
@@ -192,8 +192,8 @@ export { getLiveKitCredentials };
 
 ```typescript
 import { AccessToken } from "livekit-server-sdk";
-import { getLiveKitCredentials } from "@/lib/video/livekit";
-import type { TokenGrants } from "@/lib/video/types";
+import { getLiveKitCredentials } from "@src/lib/video/livekit";
+import type { TokenGrants } from "@src/lib/video/types";
 
 type GenerateTokenParams = {
   roomName: string;
@@ -258,7 +258,7 @@ import {
   type RoomOptions,
   type RoomConnectOptions,
 } from "livekit-client";
-import type { TokenResponse } from "@/lib/video/types";
+import type { TokenResponse } from "@src/lib/video/types";
 
 type UseRoomOptions = {
   roomName: string;
@@ -427,13 +427,13 @@ export function useRoom({
 
 ```typescript
 import { NextResponse } from "next/server";
-import { getRoomServiceClient } from "@/lib/video/livekit";
+import { getRoomServiceClient } from "@src/lib/video/livekit";
 import type {
   CreateRoomRequest,
   CreateRoomResponse,
   RoomListResponse,
   VideoRoom,
-} from "@/lib/video/types";
+} from "@src/lib/video/types";
 
 function mapRoom(room: { name: string; sid: string; numParticipants: number; maxParticipants: number; creationTime: bigint; metadata: string }): VideoRoom {
   return {
@@ -495,9 +495,9 @@ This route is protected by `withAuth` — only authenticated users can obtain a 
 
 ```typescript
 import { NextResponse } from "next/server";
-import { withAuth } from "@/lib/auth-guard";
-import { generateParticipantToken } from "@/lib/video/token";
-import type { TokenRequest, TokenResponse } from "@/lib/video/types";
+import { withAuth } from "@src/lib/auth-guard";
+import { generateParticipantToken } from "@src/lib/video/token";
+import type { TokenRequest, TokenResponse } from "@src/lib/video/types";
 
 /** POST /api/video/token — Generate a participant token (requires authentication) */
 export const POST = withAuth(async (request, { user }) => {
@@ -590,7 +590,7 @@ const { token, url } = await res.json();
 ```tsx
 "use client";
 
-import { useRoom } from "@/lib/video/use-room";
+import { useRoom } from "@src/lib/video/use-room";
 
 function VideoCall() {
   const {
@@ -680,6 +680,7 @@ function VideoCall() {
 **Cause**: WebSocket URL is incorrect or LiveKit server is unreachable.
 
 **Fix**:
+
 1. Verify `NEXT_PUBLIC_LIVEKIT_URL` starts with `wss://`
 2. Check that your LiveKit Cloud project is active or your self-hosted server is running
 3. Verify the API key/secret match the LiveKit project

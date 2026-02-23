@@ -33,6 +33,7 @@ bun add @marp-team/marp-cli
 ## Apple-Inspired Theme
 
 The theme features:
+
 - **Typography**: SF Pro-inspired clean sans-serif fonts
 - **Colors**: Neutral grays with vibrant accent colors
 - **Spacing**: Generous whitespace, elegant margins
@@ -525,7 +526,7 @@ import {
   createSlideMarkdown,
   type SlideContent,
   type ExportFormat,
-} from "@/lib/slides";
+} from "@src/lib/slides";
 
 type SlidesToolResult =
   | {
@@ -688,7 +689,7 @@ Create `src/app/api/slides/route.ts`:
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { convertMarkdownToSlides, type ExportFormat } from "@/lib/slides";
+import { convertMarkdownToSlides, type ExportFormat } from "@src/lib/slides";
 
 export async function POST(request: NextRequest) {
   try {

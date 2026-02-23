@@ -378,7 +378,7 @@ Next.js 15+ automatically detects `src/instrumentation.ts` — no config changes
 ### Basic Logging
 
 ```typescript
-import { logger } from "@/lib/observability";
+import { logger } from "@src/lib/observability";
 
 // Simple logging with automatic trace context
 logger.info("User signed in", { userId: "123", provider: "google" });
@@ -392,7 +392,7 @@ logger.error("Failed to process payment", new Error("Card declined"), {
 ### Custom Spans
 
 ```typescript
-import { withSpan, addSpanAttributes } from "@/lib/observability";
+import { withSpan, addSpanAttributes } from "@src/lib/observability";
 
 async function processOrder(orderId: string) {
   return withSpan(
@@ -420,7 +420,7 @@ async function processOrder(orderId: string) {
 ### Performance Measurement
 
 ```typescript
-import { measureAsync } from "@/lib/observability";
+import { measureAsync } from "@src/lib/observability";
 
 async function generateReport(userId: string) {
   return measureAsync(
@@ -439,7 +439,7 @@ async function generateReport(userId: string) {
 
 ```typescript
 import { NextResponse } from "next/server";
-import { logger, withSpan } from "@/lib/observability";
+import { logger, withSpan } from "@src/lib/observability";
 
 export async function POST(request: Request) {
   return withSpan("api.create-user", async (span) => {

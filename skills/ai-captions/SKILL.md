@@ -351,12 +351,12 @@ export function useCaptions(
 ```tsx
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 import {
   getFontSizeClass,
   getPositionClasses,
   type CaptionSettings,
-} from "@/lib/video/captions";
+} from "@src/lib/video/captions";
 
 type CaptionEntry = {
   speaker: string;
@@ -428,12 +428,12 @@ export function CaptionOverlay({
 "use client";
 
 import { useId } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@src/lib/utils";
 import type {
   CaptionSettings,
   CaptionFontSize,
   CaptionPosition,
-} from "@/lib/video/captions";
+} from "@src/lib/video/captions";
 
 type CaptionSettingsProps = {
   settings: CaptionSettings;
@@ -585,7 +585,7 @@ export function CaptionSettingsPanel({
 ```tsx
 "use client";
 
-import { useCaptions } from "@/lib/video/use-captions";
+import { useCaptions } from "@src/lib/video/use-captions";
 import { CaptionOverlay } from "@/components/video/caption-overlay";
 import { CaptionSettingsPanel } from "@/components/video/caption-settings";
 
@@ -636,7 +636,7 @@ export function VideoRoomWithCaptions() {
 ```tsx
 "use client";
 
-import { useCaptions } from "@/lib/video/use-captions";
+import { useCaptions } from "@src/lib/video/use-captions";
 import { CaptionOverlay } from "@/components/video/caption-overlay";
 
 export function MinimalCaptions() {
@@ -660,7 +660,7 @@ export function MinimalCaptions() {
 ```tsx
 "use client";
 
-import { useCaptions } from "@/lib/video/use-captions";
+import { useCaptions } from "@src/lib/video/use-captions";
 import { CaptionOverlay } from "@/components/video/caption-overlay";
 
 export function VideoWithCaptionToggle() {
@@ -702,7 +702,7 @@ import {
   truncateToMaxLength,
   formatSpeakerLabel,
   calculateDisplayDuration,
-} from "@/lib/video/captions";
+} from "@src/lib/video/captions";
 
 // Truncate long text
 truncateToMaxLength("A very long caption that exceeds the limit...", 50);
