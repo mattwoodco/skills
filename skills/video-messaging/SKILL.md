@@ -122,7 +122,7 @@ export type RecorderState = {
 "use client";
 
 import { useState, useCallback, useRef, useEffect } from "react";
-import type { RecorderOptions, RecorderState } from "@src/lib/video/types-messaging";
+import type { RecorderOptions, RecorderState } from "@/lib/video/types-messaging";
 
 type UseRecorderReturn = RecorderState & {
   startRecording: (options: RecorderOptions) => Promise<void>;
@@ -382,12 +382,12 @@ export type { UseRecorderReturn };
 ### Step 3: Create `src/lib/video/video-message.ts`
 
 ```typescript
-import { db } from "@src/lib/db";
-import { videoMessages } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { videoMessages } from "@/lib/db/schema";
 import { eq, desc, and, isNull, sql } from "drizzle-orm";
-import { createUploadUrl } from "@src/lib/video/mux-vod";
-import { inngest } from "@src/lib/queue/client";
-import type { VideoMessage, VideoMessageWithDetails } from "@src/lib/video/types-messaging";
+import { createUploadUrl } from "@/lib/video/mux-vod";
+import { inngest } from "@/lib/queue/client";
+import type { VideoMessage, VideoMessageWithDetails } from "@/lib/video/types-messaging";
 
 /**
  * Create a new video message, get a MUX upload URL, and return both.
@@ -623,8 +623,8 @@ import { useState, useCallback, useRef, useEffect, useId } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@src/lib/utils";
-import { useRecorder } from "@src/lib/video/use-recorder";
+import { cn } from "@/lib/utils";
+import { useRecorder } from "@/lib/video/use-recorder";
 
 type VideoRecorderProps = {
   onSend: (blob: Blob, duration: number, title: string) => Promise<void>;
@@ -964,8 +964,8 @@ import { useState, useCallback, useId } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@src/lib/utils";
-import type { VideoMessageWithDetails } from "@src/lib/video/types-messaging";
+import { cn } from "@/lib/utils";
+import type { VideoMessageWithDetails } from "@/lib/video/types-messaging";
 
 type VideoMessageCardProps = {
   message: VideoMessageWithDetails;
@@ -1222,10 +1222,10 @@ export type { VideoMessageCardProps };
 
 import { useState, useCallback, useId } from "react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 import { VideoMessageCard } from "@/components/video/video-message-card";
 import { VideoRecorder } from "@/components/video/video-recorder";
-import type { VideoMessageWithDetails } from "@src/lib/video/types-messaging";
+import type { VideoMessageWithDetails } from "@/lib/video/types-messaging";
 
 type VideoThreadProps = {
   message: VideoMessageWithDetails;
@@ -1326,13 +1326,13 @@ export type { VideoThreadProps };
 
 ```typescript
 import { NextResponse } from "next/server";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import {
   createVideoMessage,
   getVideoMessages,
-} from "@src/lib/video/video-message";
-import type { VideoMessage, VideoMessageWithDetails } from "@src/lib/video/types-messaging";
+} from "@/lib/video/video-message";
+import type { VideoMessage, VideoMessageWithDetails } from "@/lib/video/types-messaging";
 
 type CreateResponse = {
   message: VideoMessage;
@@ -1401,13 +1401,13 @@ export async function GET(): Promise<
 
 ```typescript
 import { NextResponse } from "next/server";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import {
   getVideoMessage,
   getVideoMessageReplies,
-} from "@src/lib/video/video-message";
-import type { VideoMessageWithDetails } from "@src/lib/video/types-messaging";
+} from "@/lib/video/video-message";
+import type { VideoMessageWithDetails } from "@/lib/video/types-messaging";
 
 type RouteParams = { params: Promise<{ id: string }> };
 
@@ -1520,7 +1520,7 @@ function RecordPage() {
 
 import { useEffect, useState, useId } from "react";
 import { VideoThread } from "@/components/video/video-thread";
-import type { VideoMessageWithDetails } from "@src/lib/video/types-messaging";
+import type { VideoMessageWithDetails } from "@/lib/video/types-messaging";
 
 type ThreadData = {
   message: VideoMessageWithDetails;
@@ -1588,9 +1588,9 @@ The `video-message.ts` module triggers an Inngest job (`job/video-message-proces
 
 ```typescript
 // src/lib/queue/functions/video-message-process.ts
-import { inngest } from "@src/lib/queue/client";
-import { db } from "@src/lib/db";
-import { videoMessages } from "@src/lib/db/schema";
+import { inngest } from "@/lib/queue/client";
+import { db } from "@/lib/db";
+import { videoMessages } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 export const videoMessageProcess = inngest.createFunction(
@@ -1640,7 +1640,7 @@ export const videoMessageProcess = inngest.createFunction(
 Add to `src/app/api/inngest/route.ts`:
 
 ```typescript
-import { videoMessageProcess } from "@src/lib/queue/functions/video-message-process";
+import { videoMessageProcess } from "@/lib/queue/functions/video-message-process";
 
 export const { GET, POST, PUT } = serve({
   client: inngest,

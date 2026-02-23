@@ -209,8 +209,8 @@ import {
   DirectFileOutput,
   EncodingOptionsPreset,
 } from "livekit-server-sdk";
-import { db } from "@src/lib/db";
-import { recordings } from "@src/lib/db/schema/recordings";
+import { db } from "@/lib/db";
+import { recordings } from "@/lib/db/schema/recordings";
 import { eq, desc, and } from "drizzle-orm";
 import type {
   RecordingConfig,
@@ -218,7 +218,7 @@ import type {
   StartRecordingResponse,
   StopRecordingResponse,
 } from "./types-recording";
-import type { Recording } from "@src/lib/db/schema/recordings";
+import type { Recording } from "@/lib/db/schema/recordings";
 import type { RecordingPreset } from "./types-recording";
 
 function getEgressClient(): EgressClient {
@@ -558,14 +558,14 @@ export async function getRecordingStatus(
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod/v4";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import {
   startRoomCompositeRecording,
   startTrackRecording,
   listRecordings,
-} from "@src/lib/video/recording";
-import type { RecordingConfig } from "@src/lib/video/types-recording";
+} from "@/lib/video/recording";
+import type { RecordingConfig } from "@/lib/video/types-recording";
 
 const startRecordingSchema = z.object({
   roomName: z.string().min(1),
@@ -663,15 +663,15 @@ export async function GET(request: Request) {
 
 ```typescript
 import { NextResponse } from "next/server";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import {
   getRecording,
   stopRecording,
   deleteRecording,
   getRecordingStatus,
-} from "@src/lib/video/recording";
-import { getStorageProvider } from "@src/lib/storage/storage-provider";
+} from "@/lib/video/recording";
+import { getStorageProvider } from "@/lib/storage/storage-provider";
 
 type RouteParams = { params: Promise<{ id: string }> };
 
@@ -852,7 +852,7 @@ import {
   startRoomCompositeRecording,
   stopRecording,
   listRecordings,
-} from "@src/lib/video/recording";
+} from "@/lib/video/recording";
 
 // Start recording programmatically
 const result = await startRoomCompositeRecording(

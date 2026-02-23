@@ -644,7 +644,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SpeakingIndicator } from "@/components/video/speaking-indicator";
 import { AudioControls } from "@/components/video/audio-controls";
-import { useAudioRoom } from "@src/lib/video/use-audio-room";
+import { useAudioRoom } from "@/lib/video/use-audio-room";
 
 type AudioRoomProps = {
   token: string;

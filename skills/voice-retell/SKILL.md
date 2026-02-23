@@ -16,7 +16,7 @@ Browser-based voice calling powered by Retell AI. Adds a "Switch to voice" toggl
 
 - Next.js app with `src/` directory and App Router
 - `ai-chat` skill installed (chat UI at `src/components/ai/chat.tsx`, sessions API)
-- `auth` skill installed (`withAuth` at `@src/lib/auth-guard`)
+- `auth` skill installed (`withAuth` at `@/lib/auth-guard`)
 - `env-config` skill installed (`src/env.ts`)
 - shadcn/ui initialized
 
@@ -141,8 +141,8 @@ export async function createWebCall(
 
 ```typescript
 import { NextResponse } from "next/server";
-import { withAuth } from "@src/lib/auth-guard";
-import { createWebCall } from "@src/lib/voice/retell";
+import { withAuth } from "@/lib/auth-guard";
+import { createWebCall } from "@/lib/voice/retell";
 import { db } from "@/db";
 import { chatSession, chatMessage } from "@/db/schema/chat";
 import { eq, and } from "drizzle-orm";

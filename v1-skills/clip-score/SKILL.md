@@ -17,7 +17,7 @@ Sends transcript segments to Claude with extended thinking (budgetTokens: 8000) 
 - Next.js app with App Router (no `src/` directory)
 - `ai-reasoning` skill applied (provides `@anthropic-ai/sdk` and extended thinking pattern)
 - `env-config` skill applied (provides env var validation)
-- `better-auth` configured at `@src/lib/auth`
+- `better-auth` configured at `@/lib/auth`
 
 ## Installation
 
@@ -200,7 +200,7 @@ export function getTopSegments(segments: ScoredSegment[]): ScoredSegment[] {
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import {
   buildScoringPrompt,
   mergeScores,
@@ -209,7 +209,7 @@ import {
   type ClipScoreResult,
   type TranscriptSegment,
   type ScoredSegment,
-} from "@src/lib/clip-score";
+} from "@/lib/clip-score";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,

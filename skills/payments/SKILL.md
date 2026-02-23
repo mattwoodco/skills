@@ -400,12 +400,12 @@ export async function getCreditHistory(userId: string, limit = 50) {
 ```typescript
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { stripe } from "@src/lib/payments/stripe";
+import { stripe } from "@/lib/payments/stripe";
 import { db } from "@/db";
 import { subscriptions } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { addCredits, resetMonthlyCredits } from "@src/lib/payments/credits";
-import { PLANS } from "@src/lib/payments/plans";
+import { addCredits, resetMonthlyCredits } from "@/lib/payments/credits";
+import { PLANS } from "@/lib/payments/plans";
 import type Stripe from "stripe";
 
 export async function POST(request: Request) {
@@ -572,9 +572,9 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { subscriptions } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getCreditHistory } from "@src/lib/payments/credits";
+import { getCreditHistory } from "@/lib/payments/credits";
 
 export async function GET() {
   const session = await auth.api.getSession({
@@ -606,8 +606,8 @@ export async function GET() {
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { stripe, getOrCreateCustomer } from "@src/lib/payments/stripe";
-import { auth } from "@src/lib/auth";
+import { stripe, getOrCreateCustomer } from "@/lib/payments/stripe";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 const checkoutSchema = z.object({
@@ -662,11 +662,11 @@ export async function POST(request: Request) {
 
 ```typescript
 import { NextResponse } from "next/server";
-import { stripe } from "@src/lib/payments/stripe";
+import { stripe } from "@/lib/payments/stripe";
 import { db } from "@/db";
 import { subscriptions } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 export async function POST() {
@@ -794,9 +794,9 @@ export function CreditBalance() {
 import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Check, CircleNotch } from "@phosphor-icons/react";
-import { PLANS } from "@src/lib/payments/plans";
-import type { PlanName } from "@src/lib/payments/plans";
-import { redirectToCheckout } from "@src/lib/payments/client";
+import { PLANS } from "@/lib/payments/plans";
+import type { PlanName } from "@/lib/payments/plans";
+import { redirectToCheckout } from "@/lib/payments/client";
 
 type PlanSelectorProps = {
   currentPlan: PlanName;
@@ -925,7 +925,7 @@ bunx drizzle-kit push
 ### Check balance before an operation
 
 ```typescript
-import { hasCredits, deductCredits } from "@src/lib/payments/credits";
+import { hasCredits, deductCredits } from "@/lib/payments/credits";
 
 // In an API route
 const canProceed = await hasCredits(userId, "image-generation");
@@ -943,7 +943,7 @@ const result = await deductCredits({
 ### Client-side checkout
 
 ```typescript
-import { redirectToCheckout, openBillingPortal } from "@src/lib/payments/client";
+import { redirectToCheckout, openBillingPortal } from "@/lib/payments/client";
 
 // Subscribe to Pro
 await redirectToCheckout("price_xxx", { mode: "subscription" });

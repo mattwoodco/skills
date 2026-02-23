@@ -14,7 +14,7 @@ Generates structured meeting notes from transcripts using the AI SDK's `generate
 ## Prerequisites
 
 - Next.js app with `src/` directory and App Router
-- `ai-core` skill installed (`getModel()` available at `@src/lib/ai`)
+- `ai-core` skill installed (`getModel()` available at `@/lib/ai`)
 - `transcription` skill installed (provides `Transcript` type and transcript storage)
 - `ai-tools` skill installed (provides `tool()` from AI SDK for tool definitions)
 - `db` skill installed (Drizzle ORM + Postgres)
@@ -121,7 +121,7 @@ export type MeetingNotesRecord = {
 ```typescript
 import { generateObject } from "ai";
 import { z } from "zod";
-import { getModel } from "@src/lib/ai";
+import { getModel } from "@/lib/ai";
 import type { MeetingNotes } from "./types-meeting-notes";
 
 const actionItemSchema = z.object({
@@ -193,10 +193,10 @@ Be precise with assignees — use the speaker names from the transcript. For pri
 ```typescript
 import { tool } from "ai";
 import { z } from "zod/v4";
-import { db } from "@src/lib/db";
-import { meetingNotes, actionItems } from "@src/lib/db/schema/meeting-notes";
-import { transcripts } from "@src/lib/db/schema/transcripts";
-import { generateMeetingNotes } from "@src/lib/ai/meeting-notes";
+import { db } from "@/lib/db";
+import { meetingNotes, actionItems } from "@/lib/db/schema/meeting-notes";
+import { transcripts } from "@/lib/db/schema/transcripts";
+import { generateMeetingNotes } from "@/lib/ai/meeting-notes";
 import { eq } from "drizzle-orm";
 
 type TranscriptRow = {
@@ -309,7 +309,7 @@ import {
   jsonb,
   boolean,
 } from "drizzle-orm/pg-core";
-import type { ActionItem, Decision, KeyMoment } from "@src/lib/ai/types-meeting-notes";
+import type { ActionItem, Decision, KeyMoment } from "@/lib/ai/types-meeting-notes";
 
 export const meetingNotes = pgTable("meeting_notes", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -358,7 +358,7 @@ import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import type { Decision, ActionItem, KeyMoment } from "@src/lib/ai/types-meeting-notes";
+import type { Decision, ActionItem, KeyMoment } from "@/lib/ai/types-meeting-notes";
 
 type MeetingSummaryProps = {
   summary: string;
@@ -810,7 +810,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import type { KeyMoment } from "@src/lib/ai/types-meeting-notes";
+import type { KeyMoment } from "@/lib/ai/types-meeting-notes";
 
 type MeetingTimelineProps = {
   moments: KeyMoment[];
@@ -926,11 +926,11 @@ export function MeetingTimeline({ moments, onSeek }: MeetingTimelineProps) {
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@src/lib/db";
-import { meetingNotes, actionItems } from "@src/lib/db/schema/meeting-notes";
-import { transcripts } from "@src/lib/db/schema/transcripts";
-import { generateMeetingNotes } from "@src/lib/ai/meeting-notes";
-import { withAuth } from "@src/lib/auth-guard";
+import { db } from "@/lib/db";
+import { meetingNotes, actionItems } from "@/lib/db/schema/meeting-notes";
+import { transcripts } from "@/lib/db/schema/transcripts";
+import { generateMeetingNotes } from "@/lib/ai/meeting-notes";
+import { withAuth } from "@/lib/auth-guard";
 import { eq, desc, and } from "drizzle-orm";
 
 const generateSchema = z.object({
@@ -1069,10 +1069,10 @@ export const GET = withAuth(async (request, { user }) => {
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@src/lib/db";
-import { meetingNotes, actionItems } from "@src/lib/db/schema/meeting-notes";
+import { db } from "@/lib/db";
+import { meetingNotes, actionItems } from "@/lib/db/schema/meeting-notes";
 import { eq, and } from "drizzle-orm";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 type RouteParams = { params: Promise<{ id: string }> };
@@ -1261,7 +1261,7 @@ import { MeetingTimeline } from "@/components/ai/meeting-timeline";
 The `meetingNotesTool` can be registered with the ai-tools skill so the AI assistant can generate meeting notes on demand during chat:
 
 ```typescript
-import { meetingNotesTool } from "@src/lib/ai/tools/meeting-notes-tool";
+import { meetingNotesTool } from "@/lib/ai/tools/meeting-notes-tool";
 
 // In your tools registration:
 const tools = {

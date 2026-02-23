@@ -125,7 +125,7 @@ export function formatTimestamp(seconds: number): string {
 import { type NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 import OpenAI from "openai";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import {
   SUPPORTED_FORMATS,
   MAX_FILE_SIZE,
@@ -133,7 +133,7 @@ import {
   type TranscribeResult,
   type TranscriptSegment,
   type TranscriptWord,
-} from "@src/lib/transcribe";
+} from "@/lib/transcribe";
 
 // OpenAI verbose_json response shape (partial — only fields we use)
 interface WhisperSegment {
@@ -302,7 +302,7 @@ if (!response.ok) {
 ### Utility helpers
 
 ```typescript
-import { isSupported, formatTimestamp, MAX_FILE_SIZE } from "@src/lib/transcribe";
+import { isSupported, formatTimestamp, MAX_FILE_SIZE } from "@/lib/transcribe";
 
 // Validate before uploading
 if (!isSupported(file)) {

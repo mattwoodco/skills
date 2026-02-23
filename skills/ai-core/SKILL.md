@@ -123,7 +123,7 @@ export function getEmbeddingModel(modelId?: string) {
 ## Usage
 
 ```typescript
-import { getModel } from "@src/lib/ai";
+import { getModel } from "@/lib/ai";
 import { streamText, generateText } from "ai";
 
 // Use default model (google/gemini-2.5-flash-lite)
@@ -139,7 +139,7 @@ const reasoning = await generateText({
 });
 
 // Generate embeddings
-import { getEmbeddingModel } from "@src/lib/ai";
+import { getEmbeddingModel } from "@/lib/ai";
 import { embed } from "ai";
 
 const { embedding } = await embed({

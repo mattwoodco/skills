@@ -35,7 +35,7 @@ Module not found: 'zod'
 **Example error:**
 
 ```
-Cannot find module '@src/lib/missing-helper'
+Cannot find module '@/lib/missing-helper'
 ```
 
 ---
@@ -165,7 +165,7 @@ These error types are unique to multi-skill testing where skills are layered on 
 **Example error:**
 
 ```
-Cannot find module '@src/lib/auth' — file was created at '@src/lib/auth/index.ts'
+Cannot find module '@/lib/auth' — file was created at '@/lib/auth/index.ts'
 ```
 
 ---
@@ -179,7 +179,7 @@ Cannot find module '@src/lib/auth' — file was created at '@src/lib/auth/index.
 **Example error:**
 
 ```
-Type 'Session' from '@src/lib/auth' is missing property 'user.role'
+Type 'Session' from '@/lib/auth' is missing property 'user.role'
 # auth skill exports Session without role, but ai-chat skill expects it
 ```
 

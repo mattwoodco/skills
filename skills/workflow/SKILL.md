@@ -160,7 +160,7 @@ import { DurableAgent } from "@workflow/ai/agent";
 import type { UIMessageChunk } from "ai";
 import { getWritable } from "workflow";
 import type { ModelMessage } from "ai";
-import { getWorkflowModel } from "@src/lib/workflow-model";
+import { getWorkflowModel } from "@/lib/workflow-model";
 import { allTools } from "./tools";
 
 export async function chatWorkflow(messages: ModelMessage[]) {

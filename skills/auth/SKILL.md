@@ -150,7 +150,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db";
 import * as schema from "@/db/schema/auth";
 import { env } from "@/env";
-import { sendEmail } from "@src/lib/email";
+import { sendEmail } from "@/lib/email";
 import { PasswordResetEmail } from "@/emails/password-reset";
 import { VerificationEmail } from "@/emails/verification";
 import { WelcomeEmail } from "@/emails/welcome";
@@ -263,7 +263,7 @@ export const {
 ### 3. Create Auth Guard Helpers (`src/lib/auth-guard.ts`)
 
 ```typescript
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
@@ -361,7 +361,7 @@ export async function requireAuth(): Promise<{ session: Session; user: User }> {
 ### 4. Create API Route (`src/app/api/auth/[...all]/route.ts`)
 
 ```typescript
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { toNextJsHandler } from "better-auth/next-js";
 import type { NextRequest } from "next/server";
 
@@ -508,7 +508,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const { auth } = await import("@src/lib/auth");
+  const { auth } = await import("@/lib/auth");
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -549,7 +549,7 @@ import {
   SignInForm,
   SignUpForm,
 } from "@daveyplate/better-auth-ui";
-import { authClient } from "@src/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 
 interface AuthCardProps {
   mode: "sign-in" | "sign-up";
@@ -626,7 +626,7 @@ export default function SignUpPage() {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useSession, signOut } from "@src/lib/auth-client";
+import { useSession, signOut } from "@/lib/auth-client";
 
 export function NavBar() {
   const router = useRouter();
@@ -721,7 +721,7 @@ export function NavBar() {
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession, signOut, authClient } from "@src/lib/auth-client";
+import { useSession, signOut, authClient } from "@/lib/auth-client";
 import { CircleNotch } from "@phosphor-icons/react";
 
 export default function AccountPage() {
@@ -825,7 +825,7 @@ export default function AccountPage() {
 "use client";
 
 import { useState, useEffect, useId, useCallback } from "react";
-import { useSession, authClient } from "@src/lib/auth-client";
+import { useSession, authClient } from "@/lib/auth-client";
 import { CircleNotch } from "@phosphor-icons/react";
 
 type SessionData = {
@@ -957,7 +957,7 @@ export default function SecurityPage() {
 
 ```tsx
 import { NextResponse } from "next/server";
-import { withAuth } from "@src/lib/auth-guard";
+import { withAuth } from "@/lib/auth-guard";
 import { db } from "@/db";
 import { user, session, account } from "@/db/schema/auth";
 import { eq } from "drizzle-orm";
@@ -1000,7 +1000,7 @@ export const DELETE = withAuth(async (request, { user: currentUser }) => {
 ### In API Routes
 
 ```typescript
-import { withAuth, withAdmin, withRoles } from "@src/lib/auth-guard";
+import { withAuth, withAdmin, withRoles } from "@/lib/auth-guard";
 import { NextResponse } from "next/server";
 
 // Require authentication
@@ -1022,7 +1022,7 @@ export const POST = withRoles(["admin", "moderator"], async (request, { user }) 
 ### In Server Components
 
 ```tsx
-import { requireAuth, getServerSession } from "@src/lib/auth-guard";
+import { requireAuth, getServerSession } from "@/lib/auth-guard";
 import { redirect } from "next/navigation";
 
 export default async function ProtectedPage() {

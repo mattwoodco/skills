@@ -15,7 +15,7 @@ Token-based public sharing system that lets authenticated users generate shareab
 ## Prerequisites
 
 - Next.js app with App Router (no `src/` directory)
-- `@src/lib/auth` exporting `auth` (better-auth)
+- `@/lib/auth` exporting `auth` (better-auth)
 - `@/db` exporting `db` (Drizzle + Postgres)
 - `db/schema/index.ts` exporting all schema tables
 - `NEXT_PUBLIC_APP_URL` set in environment
@@ -109,8 +109,8 @@ export function isAccessible(link: ShareLink): boolean {
 ```typescript
 import { db } from "@/db"
 import { sharedLinks } from "@/db/schema"
-import { auth } from "@src/lib/auth"
-import { generateShareUrl } from "@src/lib/share-link"
+import { auth } from "@/lib/auth"
+import { generateShareUrl } from "@/lib/share-link"
 import { eq, and, isNull, or, gt } from "drizzle-orm"
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
@@ -213,8 +213,8 @@ export async function GET(): Promise<NextResponse> {
 ```typescript
 import { db } from "@/db"
 import { sharedLinks } from "@/db/schema"
-import { auth } from "@src/lib/auth"
-import { isAccessible, isExpired, isOverLimit, isRevoked } from "@src/lib/share-link"
+import { auth } from "@/lib/auth"
+import { isAccessible, isExpired, isOverLimit, isRevoked } from "@/lib/share-link"
 import { eq } from "drizzle-orm"
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
@@ -338,7 +338,7 @@ const links = await fetch("/api/share").then((r) => r.json())
 await fetch(`/api/share/${token}`, { method: "DELETE" })
 
 // Helpers
-import { generateShareUrl, isAccessible, isExpired, isRevoked } from "@src/lib/share-link"
+import { generateShareUrl, isAccessible, isExpired, isRevoked } from "@/lib/share-link"
 
 generateShareUrl("aB3xY9mK2pQ") // => "https://myapp.com/share/aB3xY9mK2pQ"
 ```

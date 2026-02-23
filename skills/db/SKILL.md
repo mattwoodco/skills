@@ -225,16 +225,16 @@ bun run db:migrate
 ### Importing the Database Client
 
 ```typescript
-import { db } from "@src/lib/db";
+import { db } from "@/lib/db";
 ```
 
-> **Path convention:** The canonical import path is `@src/lib/db` (not `@/db`). All downstream skills that depend on this skill should use `@src/lib/db` and `@src/lib/db/schema` for imports.
+> **Path convention:** The canonical import path is `@/lib/db` (not `@/db`). All downstream skills that depend on this skill should use `@/lib/db` and `@/lib/db/schema` for imports.
 
 ### Insert Records
 
 ```typescript
-import { db } from "@src/lib/db";
-import { example } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { example } from "@/lib/db/schema";
 
 const newRecord = await db
   .insert(example)
@@ -247,8 +247,8 @@ const newRecord = await db
 ### Select Records
 
 ```typescript
-import { db } from "@src/lib/db";
-import { example } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { example } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 // Select all
@@ -269,8 +269,8 @@ const record = await db.query.example.findFirst({
 ### Update Records
 
 ```typescript
-import { db } from "@src/lib/db";
-import { example } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { example } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 const updated = await db
@@ -286,8 +286,8 @@ const updated = await db
 ### Delete Records
 
 ```typescript
-import { db } from "@src/lib/db";
-import { example } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { example } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 await db.delete(example).where(eq(example.id, "some-uuid"));
@@ -296,8 +296,8 @@ await db.delete(example).where(eq(example.id, "some-uuid"));
 ### Transactions
 
 ```typescript
-import { db } from "@src/lib/db";
-import { example } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { example } from "@/lib/db/schema";
 
 await db.transaction(async (tx) => {
   const inserted = await tx
@@ -372,7 +372,7 @@ Drizzle provides type inference from your schema:
 
 ```typescript
 import type { InferSelectModel, InferInsertModel } from "drizzle-orm";
-import { example } from "@src/lib/db/schema";
+import { example } from "@/lib/db/schema";
 
 type Example = InferSelectModel<typeof example>;
 type NewExample = InferInsertModel<typeof example>;
@@ -475,8 +475,8 @@ This skill is a library -- it does not create any API endpoints. Use the `db` cl
 ```typescript
 // src/app/api/examples/route.ts
 import { NextResponse } from "next/server";
-import { db } from "@src/lib/db";
-import { example } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { example } from "@/lib/db/schema";
 
 export async function GET() {
   const records = await db.select().from(example);

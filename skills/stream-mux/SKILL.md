@@ -182,11 +182,11 @@ export function getMuxClient(): Mux {
 ### Step 3: Create `src/lib/video/mux-live.ts`
 
 ```typescript
-import { getMuxClient } from "@src/lib/video/mux";
+import { getMuxClient } from "@/lib/video/mux";
 import type {
   MuxLiveStream,
   CreateLiveStreamOptions,
-} from "@src/lib/video/types-mux";
+} from "@/lib/video/types-mux";
 
 /**
  * Create a new MUX live stream with RTMP ingest.
@@ -272,8 +272,8 @@ export async function listLiveStreams(): Promise<MuxLiveStream[]> {
 ### Step 4: Create `src/lib/video/mux-vod.ts`
 
 ```typescript
-import { getMuxClient } from "@src/lib/video/mux";
-import type { MuxAsset, MuxUpload } from "@src/lib/video/types-mux";
+import { getMuxClient } from "@/lib/video/mux";
+import type { MuxAsset, MuxUpload } from "@/lib/video/types-mux";
 
 /**
  * Create a direct upload URL for client-side video uploads.
@@ -389,10 +389,10 @@ function mapAssetStatus(
 ### Step 5: Create `src/lib/video/mux-webhooks.ts`
 
 ```typescript
-import { db } from "@src/lib/db";
-import { muxAssets } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { muxAssets } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
-import type { MuxWebhookEvent } from "@src/lib/video/types-mux";
+import type { MuxWebhookEvent } from "@/lib/video/types-mux";
 
 /**
  * Verify MUX webhook signature.
@@ -594,11 +594,11 @@ export * from "./mux-assets";
 
 ```typescript
 import { NextResponse } from "next/server";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { db } from "@src/lib/db";
-import { muxAssets } from "@src/lib/db/schema";
-import { createUploadUrl } from "@src/lib/video/mux-vod";
+import { db } from "@/lib/db";
+import { muxAssets } from "@/lib/db/schema";
+import { createUploadUrl } from "@/lib/video/mux-vod";
 
 type UploadResponse = {
   uploadUrl: string;
@@ -651,12 +651,12 @@ export async function POST(
 
 ```typescript
 import { NextResponse } from "next/server";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { db } from "@src/lib/db";
-import { muxAssets } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { muxAssets } from "@/lib/db/schema";
 import { eq, desc } from "drizzle-orm";
-import type { MuxAssetRecord } from "@src/lib/db/schema/mux-assets";
+import type { MuxAssetRecord } from "@/lib/db/schema/mux-assets";
 
 type AssetsResponse = {
   assets: MuxAssetRecord[];
@@ -692,13 +692,13 @@ export async function GET(): Promise<
 
 ```typescript
 import { NextResponse } from "next/server";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { db } from "@src/lib/db";
-import { muxAssets } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { muxAssets } from "@/lib/db/schema";
 import { eq, and } from "drizzle-orm";
-import { deleteAsset } from "@src/lib/video/mux-vod";
-import type { MuxAssetRecord } from "@src/lib/db/schema/mux-assets";
+import { deleteAsset } from "@/lib/video/mux-vod";
+import type { MuxAssetRecord } from "@/lib/db/schema/mux-assets";
 
 type RouteParams = { params: Promise<{ id: string }> };
 
@@ -777,17 +777,17 @@ export async function DELETE(
 
 ```typescript
 import { NextResponse } from "next/server";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { db } from "@src/lib/db";
-import { muxAssets } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { muxAssets } from "@/lib/db/schema";
 import { eq, desc, and } from "drizzle-orm";
 import {
   createLiveStream,
   listLiveStreams,
-} from "@src/lib/video/mux-live";
-import type { MuxLiveStream } from "@src/lib/video/types-mux";
-import type { MuxAssetRecord } from "@src/lib/db/schema/mux-assets";
+} from "@/lib/video/mux-live";
+import type { MuxLiveStream } from "@/lib/video/types-mux";
+import type { MuxAssetRecord } from "@/lib/db/schema/mux-assets";
 
 type CreateLiveResponse = {
   stream: MuxLiveStream;
@@ -879,8 +879,8 @@ import { NextResponse } from "next/server";
 import {
   verifyMuxWebhook,
   handleMuxWebhook,
-} from "@src/lib/video/mux-webhooks";
-import type { MuxWebhookEvent } from "@src/lib/video/types-mux";
+} from "@/lib/video/mux-webhooks";
+import type { MuxWebhookEvent } from "@/lib/video/types-mux";
 
 /** POST /api/mux/webhook — MUX webhook handler */
 export async function POST(
@@ -991,8 +991,8 @@ await fetch(`/api/mux/assets/${assetRecordId}`, {
 ### Server-Side Usage
 
 ```typescript
-import { getAsset, getPlaybackUrl, getThumbnailUrl } from "@src/lib/video/mux-vod";
-import { createLiveStream, getLiveStreamStatus } from "@src/lib/video/mux-live";
+import { getAsset, getPlaybackUrl, getThumbnailUrl } from "@/lib/video/mux-vod";
+import { createLiveStream, getLiveStreamStatus } from "@/lib/video/mux-live";
 
 // Get playback URL
 const url = getPlaybackUrl("abcd1234");

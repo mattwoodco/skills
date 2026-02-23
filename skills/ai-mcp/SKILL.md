@@ -195,15 +195,15 @@ Add the MCP imports at the top of the file.
 Find this:
 
 ```typescript
-import { allTools } from "@src/lib/ai/tools";
+import { allTools } from "@/lib/ai/tools";
 ```
 
 Replace with:
 
 ```typescript
-import { allTools } from "@src/lib/ai/tools";
-import { connectMCPServers } from "@src/lib/ai/mcp/client";
-import { mcpServers } from "@src/lib/ai/mcp/servers";
+import { allTools } from "@/lib/ai/tools";
+import { connectMCPServers } from "@/lib/ai/mcp/client";
+import { mcpServers } from "@/lib/ai/mcp/servers";
 ```
 
 Next, connect MCP servers and merge their tools. Find this:

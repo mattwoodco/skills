@@ -324,7 +324,7 @@ export async function healthCheck() {
 
 ```typescript
 import { NextResponse, type NextRequest } from "next/server";
-import { cachedSearch, sanitizeSearchQuery } from "@src/lib/search";
+import { cachedSearch, sanitizeSearchQuery } from "@/lib/search";
 import { z } from "zod";
 
 const ALLOWED_ORIGINS = [
@@ -792,7 +792,7 @@ import { useRouter } from "next/navigation";
 import { SearchIcon, LoaderIcon, XIcon } from "lucide-react";
 import { useHotkey, useEscapeKey } from "@/hooks/use-hotkey";
 import { useSearch } from "@/hooks/use-search";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 
 type SearchModalProps = {
   open?: boolean;
@@ -995,7 +995,7 @@ export default function SearchPage() {
 ### File: `scripts/seed-search.ts`
 
 ```typescript
-import { searchClient, configureIndex, indexDocuments, waitForTask } from "@src/lib/search";
+import { searchClient, configureIndex, indexDocuments, waitForTask } from "@/lib/search";
 
 async function seedSearchIndex() {
   console.log("Configuring products index...");

@@ -48,7 +48,7 @@ src/
 import { useRef, useCallback } from "react";
 import MuxPlayerElement from "@mux/mux-player-react";
 import type { MuxPlayerRefAttributes } from "@mux/mux-player-react";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 
 type MuxPlayerProps = {
   playbackId: string;
@@ -151,7 +151,7 @@ export type { MuxPlayerProps, MuxPlayerRef };
 "use client";
 
 import { useState, useId } from "react";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 type Chapter = {
@@ -248,7 +248,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 
 type CaptionTrack = {
   language: string;
@@ -363,7 +363,7 @@ export type { VideoCaptionsToggleProps, CaptionTrack };
 "use client";
 
 import { useState, useCallback, useRef, useMemo } from "react";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 
 type VideoThumbnailHoverProps = {
   playbackId: string;
@@ -489,7 +489,7 @@ import { useState, useCallback, useId } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 
 type VideoCardProps = {
   playbackId: string;

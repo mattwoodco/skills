@@ -14,7 +14,7 @@ Web Push API notifications with VAPID authentication. Includes device subscripti
 ## Prerequisites
 
 - Next.js app with `src/` directory and App Router
-- `auth` skill installed (`withAuth` available at `@src/lib/auth-guard`)
+- `auth` skill installed (`withAuth` available at `@/lib/auth-guard`)
 - `db` skill installed (Drizzle ORM + Postgres)
 - `add-pwa` skill installed (service worker registration support)
 - shadcn/ui initialized
@@ -160,8 +160,8 @@ export type NotificationRecord = {
 
 ```typescript
 import webPush from "web-push";
-import { db } from "@src/lib/db";
-import { pushSubscriptions, notifications } from "@src/lib/db/schema/push-subscriptions";
+import { db } from "@/lib/db";
+import { pushSubscriptions, notifications } from "@/lib/db/schema/push-subscriptions";
 import { eq } from "drizzle-orm";
 import type { NotificationPayload } from "./types";
 
@@ -472,7 +472,7 @@ import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Bell } from "lucide-react";
 import { NotificationCenter } from "./notification-center";
-import type { NotificationRecord } from "@src/lib/notifications/types";
+import type { NotificationRecord } from "@/lib/notifications/types";
 
 export function NotificationBell() {
   const [unreadCount, setUnreadCount] = useState(0);
@@ -592,7 +592,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { CheckCheck, Loader2 } from "lucide-react";
-import type { NotificationRecord } from "@src/lib/notifications/types";
+import type { NotificationRecord } from "@/lib/notifications/types";
 
 type NotificationCenterProps = {
   notifications: NotificationRecord[];
@@ -717,7 +717,7 @@ import { useState, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Bell, Loader2, X } from "lucide-react";
-import { usePush } from "@src/lib/notifications/use-push";
+import { usePush } from "@/lib/notifications/use-push";
 
 type PermissionPromptProps = {
   onDismiss?: () => void;
@@ -881,10 +881,10 @@ export * from "./push-subscriptions";
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod/v4";
-import { db } from "@src/lib/db";
-import { pushSubscriptions } from "@src/lib/db/schema/push-subscriptions";
+import { db } from "@/lib/db";
+import { pushSubscriptions } from "@/lib/db/schema/push-subscriptions";
 import { eq, and } from "drizzle-orm";
-import { withAuth } from "@src/lib/auth-guard";
+import { withAuth } from "@/lib/auth-guard";
 
 const subscribeSchema = z.object({
   endpoint: z.string().url(),
@@ -969,10 +969,10 @@ export const DELETE = withAuth(async (request, { user }) => {
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod/v4";
-import { db } from "@src/lib/db";
-import { notificationPreferences } from "@src/lib/db/schema/push-subscriptions";
+import { db } from "@/lib/db";
+import { notificationPreferences } from "@/lib/db/schema/push-subscriptions";
 import { eq } from "drizzle-orm";
-import { withAuth } from "@src/lib/auth-guard";
+import { withAuth } from "@/lib/auth-guard";
 
 export const GET = withAuth(async (_request, { user }) => {
   const prefs = await db
@@ -1062,10 +1062,10 @@ export const PUT = withAuth(async (request, { user }) => {
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod/v4";
-import { db } from "@src/lib/db";
-import { notifications } from "@src/lib/db/schema/push-subscriptions";
+import { db } from "@/lib/db";
+import { notifications } from "@/lib/db/schema/push-subscriptions";
 import { eq, desc, and, sql } from "drizzle-orm";
-import { withAuth } from "@src/lib/auth-guard";
+import { withAuth } from "@/lib/auth-guard";
 
 export const GET = withAuth(async (request, { user }) => {
   const { searchParams } = new URL(request.url);
@@ -1252,7 +1252,7 @@ self.addEventListener("pushsubscriptionchange", (event) => {
 ### Subscribe a user to push notifications
 
 ```tsx
-import { usePush } from "@src/lib/notifications/use-push";
+import { usePush } from "@/lib/notifications/use-push";
 
 function MyComponent() {
   const { isSupported, isSubscribed, subscribe, unsubscribe, isLoading } = usePush();
@@ -1300,7 +1300,7 @@ function Header() {
 ### Send a push notification (server-side)
 
 ```typescript
-import { sendPushNotification, sendBulkNotifications } from "@src/lib/notifications/push";
+import { sendPushNotification, sendBulkNotifications } from "@/lib/notifications/push";
 
 // Send to one user
 await sendPushNotification("user-123", {
@@ -1320,10 +1320,10 @@ await sendBulkNotifications(["user-123", "user-456"], {
 ### Check user preferences before sending
 
 ```typescript
-import { db } from "@src/lib/db";
-import { notificationPreferences } from "@src/lib/db/schema/push-subscriptions";
+import { db } from "@/lib/db";
+import { notificationPreferences } from "@/lib/db/schema/push-subscriptions";
 import { eq } from "drizzle-orm";
-import { sendPushNotification } from "@src/lib/notifications/push";
+import { sendPushNotification } from "@/lib/notifications/push";
 
 async function notifyMention(userId: string, channelName: string, mentionedBy: string) {
   const prefs = await db

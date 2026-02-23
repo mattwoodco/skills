@@ -246,7 +246,7 @@ export type { StorageFile, UploadProgress };
 "use client";
 
 import { useCallback, useId, useState, type DragEvent } from "react";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 import { UploadSimple, File, CircleNotch, WarningCircle } from "@phosphor-icons/react";
 
 type AcceptCategory = "images" | "audio" | "video" | "pdf" | "text" | "archives";
@@ -407,7 +407,7 @@ export type { AcceptCategory, DropzoneProps };
 "use client";
 
 import { useId, useState, memo } from "react";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 import {
   File, ImageSquare, VideoCamera, MusicNote, FileText,
   FileArchive, DownloadSimple, Trash, Eye,
@@ -638,7 +638,7 @@ export function FileList({
 "use client";
 
 import { useEffect, useState } from "react";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 import { CircleNotch, WarningCircle, DownloadSimple, MusicNote } from "@phosphor-icons/react";
 import { buttonVariants } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -779,7 +779,7 @@ export function FilePreview({ file, isOpen, onClose }: FilePreviewProps) {
 "use client";
 
 import { useCallback, useEffect, useId, useState, memo } from "react";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 import { ArrowClockwise, CircleNotch, WarningCircle, X } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";

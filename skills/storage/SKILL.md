@@ -577,7 +577,7 @@ export { MAX_FILE_SIZE, getContentTypeFromFilename } from "./config";
 
 ```typescript
 import { type NextRequest, NextResponse } from "next/server";
-import { getStorageProvider, type ListResult, StorageError } from "@src/lib/storage/storage-provider";
+import { getStorageProvider, type ListResult, StorageError } from "@/lib/storage/storage-provider";
 
 export async function GET(
   request: NextRequest
@@ -609,7 +609,7 @@ export async function GET(
 
 ```typescript
 import { type NextRequest, NextResponse } from "next/server";
-import { getStorageProvider, type StorageFile, StorageError } from "@src/lib/storage/storage-provider";
+import { getStorageProvider, type StorageFile, StorageError } from "@/lib/storage/storage-provider";
 
 function generateFileKey(filename: string): string {
   const timestamp = Date.now();
@@ -650,7 +650,7 @@ export async function POST(
 
 ```typescript
 import { type NextRequest, NextResponse } from "next/server";
-import { getStorageProvider, StorageError } from "@src/lib/storage/storage-provider";
+import { getStorageProvider, StorageError } from "@/lib/storage/storage-provider";
 
 type RouteParams = { params: Promise<{ key: string }> };
 
@@ -699,7 +699,7 @@ export async function GET(
 
 ```typescript
 import { type NextRequest, NextResponse } from "next/server";
-import { getStorageProvider, StorageError } from "@src/lib/storage/storage-provider";
+import { getStorageProvider, StorageError } from "@/lib/storage/storage-provider";
 
 type DeleteBody = { key: string } | { keys: string[] };
 
@@ -753,7 +753,7 @@ export async function POST(
 ## Usage
 
 ```typescript
-import { getStorageProvider } from "@src/lib/storage/storage-provider";
+import { getStorageProvider } from "@/lib/storage/storage-provider";
 
 const storage = getStorageProvider();
 

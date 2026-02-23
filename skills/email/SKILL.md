@@ -297,7 +297,7 @@ export function NotificationEmail({ title, message, actionUrl, actionText }: Pro
 ### Send Auth Code
 
 ```typescript
-import { sendEmail } from "@src/lib/email";
+import { sendEmail } from "@/lib/email";
 import { AuthCodeEmail } from "@/emails/auth-code";
 
 await sendEmail({

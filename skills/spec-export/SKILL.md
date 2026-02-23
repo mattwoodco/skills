@@ -27,7 +27,7 @@ The pipeline flow:
 - `ai-tasks` skill installed (provides task management infrastructure)
 - `structured-editor` skill installed (provides document + sections data model)
 - `ai-core` skill installed (provides `getModel()`)
-- Auth skill installed (provides `withAuth` from `@src/lib/auth-guard`)
+- Auth skill installed (provides `withAuth` from `@/lib/auth-guard`)
 - shadcn/ui initialized
 
 ## Installation
@@ -123,7 +123,7 @@ export type ExportExecuteResponse = {
 
 ```typescript
 import { generateObject } from "ai";
-import { getModel } from "@src/lib/ai";
+import { getModel } from "@/lib/ai";
 import { z } from "zod";
 import type { TicketPreview } from "./types";
 
@@ -394,12 +394,12 @@ export async function createGitHubTickets(
 ```typescript
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { withAuth } from "@src/lib/auth-guard";
-import { db } from "@src/lib/db";
-import { document, section } from "@src/lib/db/schema/editor";
+import { withAuth } from "@/lib/auth-guard";
+import { db } from "@/lib/db";
+import { document, section } from "@/lib/db/schema/editor";
 import { eq, and, asc } from "drizzle-orm";
-import { mapDocumentToTickets } from "@src/lib/spec-export/mapper";
-import type { ExportTarget, ExportPreviewResponse } from "@src/lib/spec-export/types";
+import { mapDocumentToTickets } from "@/lib/spec-export/mapper";
+import type { ExportTarget, ExportPreviewResponse } from "@/lib/spec-export/types";
 
 type PreviewBody = {
   target: ExportTarget;
@@ -483,19 +483,19 @@ export const POST = withAuth(async (request: NextRequest, { user }) => {
 ```typescript
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { withAuth } from "@src/lib/auth-guard";
-import { db } from "@src/lib/db";
-import { document, section } from "@src/lib/db/schema/editor";
+import { withAuth } from "@/lib/auth-guard";
+import { db } from "@/lib/db";
+import { document, section } from "@/lib/db/schema/editor";
 import { eq, and } from "drizzle-orm";
-import { connectMCPServers } from "@src/lib/ai/mcp/client";
-import { mcpServers } from "@src/lib/ai/mcp/servers";
-import { createLinearTickets } from "@src/lib/spec-export/targets/linear";
-import { createGitHubTickets } from "@src/lib/spec-export/targets/github";
+import { connectMCPServers } from "@/lib/ai/mcp/client";
+import { mcpServers } from "@/lib/ai/mcp/servers";
+import { createLinearTickets } from "@/lib/spec-export/targets/linear";
+import { createGitHubTickets } from "@/lib/spec-export/targets/github";
 import type {
   ExportExecuteRequest,
   ExportExecuteResponse,
   ExportResult,
-} from "@src/lib/spec-export/types";
+} from "@/lib/spec-export/types";
 
 export const POST = withAuth(async (request: NextRequest, { user }) => {
   const pathParts = request.nextUrl.pathname.split("/");
@@ -637,7 +637,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ExportDialog } from "@/components/editor/export-dialog";
-import type { ExportTarget } from "@src/lib/spec-export/types";
+import type { ExportTarget } from "@/lib/spec-export/types";
 
 type ExportButtonProps = {
   documentId: string;
@@ -735,7 +735,7 @@ import type {
   ExportResult,
   ExportPreviewResponse,
   ExportExecuteResponse,
-} from "@src/lib/spec-export/types";
+} from "@/lib/spec-export/types";
 
 type ExportDialogProps = {
   open: boolean;

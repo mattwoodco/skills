@@ -590,8 +590,8 @@ export const metadata: Metadata = {
 
 ```tsx
 import { Suspense } from "react";
-import { fetchFeedItems } from "@src/lib/rss/fetch-content";
-import { generateRss, generateAtom, generateJson } from "@src/lib/rss/generate";
+import { fetchFeedItems } from "@/lib/rss/fetch-content";
+import { generateRss, generateAtom, generateJson } from "@/lib/rss/generate";
 import { env } from "@/env";
 
 export const dynamic = "force-dynamic";
@@ -822,8 +822,8 @@ For projects using Elysia for API routes, add RSS endpoints:
 ```typescript
 // In src/app/api/[[...slugs]]/route.ts
 import { Elysia } from "elysia";
-import { generateRss, generateAtom, generateJson } from "@src/lib/rss/generate";
-import { fetchFeedItems } from "@src/lib/rss/fetch-content";
+import { generateRss, generateAtom, generateJson } from "@/lib/rss/generate";
+import { fetchFeedItems } from "@/lib/rss/fetch-content";
 
 const app = new Elysia({ prefix: "/api" })
   // ... existing routes

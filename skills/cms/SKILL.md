@@ -236,9 +236,9 @@ Add to your `src/app/globals.css` (after the existing `@import "tailwindcss";`):
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { withAdmin } from "@src/lib/auth-guard";
-import { db } from "@src/lib/db";
-import { posts, postsToCategories, categories } from "@src/lib/db/schema/cms";
+import { withAdmin } from "@/lib/auth-guard";
+import { db } from "@/lib/db";
+import { posts, postsToCategories, categories } from "@/lib/db/schema/cms";
 import { desc, eq, ilike, sql, and, inArray } from "drizzle-orm";
 
 export const GET = withAdmin(async (request) => {
@@ -320,10 +320,10 @@ export const POST = withAdmin(async (request, { user }) => {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@src/lib/db";
-import { posts, postsToCategories } from "@src/lib/db/schema/cms";
+import { db } from "@/lib/db";
+import { posts, postsToCategories } from "@/lib/db/schema/cms";
 import { eq } from "drizzle-orm";
-import { getServerSession } from "@src/lib/auth-guard";
+import { getServerSession } from "@/lib/auth-guard";
 
 type RouteParams = { params: Promise<{ id: string }> };
 
@@ -424,9 +424,9 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { withAdmin } from "@src/lib/auth-guard";
-import { db } from "@src/lib/db";
-import { pages } from "@src/lib/db/schema/cms";
+import { withAdmin } from "@/lib/auth-guard";
+import { db } from "@/lib/db";
+import { pages } from "@/lib/db/schema/cms";
 import { desc, eq, ilike, sql, and } from "drizzle-orm";
 
 export const GET = withAdmin(async (request) => {
@@ -495,10 +495,10 @@ export const POST = withAdmin(async (request) => {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@src/lib/db";
-import { pages } from "@src/lib/db/schema/cms";
+import { db } from "@/lib/db";
+import { pages } from "@/lib/db/schema/cms";
 import { eq } from "drizzle-orm";
-import { getServerSession } from "@src/lib/auth-guard";
+import { getServerSession } from "@/lib/auth-guard";
 
 type RouteParams = { params: Promise<{ id: string }> };
 
@@ -577,9 +577,9 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { withAdmin } from "@src/lib/auth-guard";
-import { db } from "@src/lib/db";
-import { categories } from "@src/lib/db/schema/cms";
+import { withAdmin } from "@/lib/auth-guard";
+import { db } from "@/lib/db";
+import { categories } from "@/lib/db/schema/cms";
 import { eq, asc } from "drizzle-orm";
 
 export const GET = withAdmin(async () => {
@@ -661,7 +661,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 import {
   TextB,
   TextItalic,
@@ -871,7 +871,7 @@ export function insertImageIntoEditor(
 "use client";
 
 import { useCallback, useEffect, useId, useState } from "react";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 import { ImageSquare, VideoCamera, Check, CircleNotch, UploadSimple } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import {
@@ -1589,7 +1589,7 @@ export function PageForm({ page, isEdit }: PageFormProps) {
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 import { FileText, File, Tag, ImageSquare, SquaresFour } from "@phosphor-icons/react";
 
 const navItems = [

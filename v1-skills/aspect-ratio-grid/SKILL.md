@@ -15,7 +15,7 @@ Responsive grid that renders the same image in every social platform format. Eac
 ## Prerequisites
 
 - Next.js App Router (no `src/` directory)
-- `@src/lib/platform-specs` — exports `getPlatform(id)` and `PlatformId` (from the `platform-specs` skill)
+- `@/lib/platform-specs` — exports `getPlatform(id)` and `PlatformId` (from the `platform-specs` skill)
 - shadcn/ui with Switch and Button components
 - `@phosphor-icons/react`
 
@@ -44,8 +44,8 @@ components/aspect-ratio-grid/aspect-ratio-card.tsx
 
 import { useId, useRef, useState } from "react";
 import { DownloadSimple, ArrowsClockwise } from "@phosphor-icons/react";
-import type { PlatformId } from "@src/lib/platform-specs";
-import { getPlatform } from "@src/lib/platform-specs";
+import type { PlatformId } from "@/lib/platform-specs";
+import { getPlatform } from "@/lib/platform-specs";
 
 export type ImageVariant = {
   platformId: PlatformId;
@@ -241,12 +241,12 @@ import { useId, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 import {
   AspectRatioCard,
   type ImageVariant,
 } from "./aspect-ratio-card";
-import type { PlatformId } from "@src/lib/platform-specs";
+import type { PlatformId } from "@/lib/platform-specs";
 
 type AspectRatioGridProps = {
   variants: ImageVariant[];
@@ -316,7 +316,7 @@ export function AspectRatioGrid({
 
 ```typescript
 import { AspectRatioGrid } from "@/components/aspect-ratio-grid/aspect-ratio-grid";
-import { downloadAsZip } from "@src/lib/zip-download/client";
+import { downloadAsZip } from "@/lib/zip-download/client";
 
 const variants = [
   {

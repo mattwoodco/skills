@@ -236,8 +236,8 @@ export * from "./livestreams";
 ```typescript
 import { EgressClient, EncodingOptions, StreamOutput, StreamProtocol } from "livekit-server-sdk";
 import Mux from "@mux/mux-node";
-import { db } from "@src/lib/db";
-import { livestreams, type Livestream } from "@src/lib/db/schema";
+import { db } from "@/lib/db";
+import { livestreams, type Livestream } from "@/lib/db/schema";
 import { eq, and, desc } from "drizzle-orm";
 import {
   buildMuxRtmpUrl,
@@ -623,7 +623,7 @@ export async function listLivestreams(
 }
 
 // Re-export types
-export type { Livestream } from "@src/lib/db/schema";
+export type { Livestream } from "@/lib/db/schema";
 export type {
   StreamDestination,
   StreamDestinationType,
@@ -635,16 +635,16 @@ export type {
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod/v4";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import {
   startLivestream,
   stopLivestream,
   getActiveLivestream,
   listLivestreams,
-} from "@src/lib/video/livestream";
-import { buildDestination } from "@src/lib/video/stream-destinations";
-import type { StreamDestination, StreamDestinationType } from "@src/lib/video/stream-destinations";
+} from "@/lib/video/livestream";
+import { buildDestination } from "@/lib/video/stream-destinations";
+import type { StreamDestination, StreamDestinationType } from "@/lib/video/stream-destinations";
 
 const destinationSchema = z.object({
   type: z.enum(["youtube", "twitch", "custom"]),
@@ -791,12 +791,12 @@ export async function GET(request: Request) {
 
 ```typescript
 import { NextResponse } from "next/server";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import {
   getLivestreamStatus,
   getActiveLivestream,
-} from "@src/lib/video/livestream";
+} from "@/lib/video/livestream";
 
 export async function GET(request: Request) {
   const session = await auth.api.getSession({
@@ -945,8 +945,8 @@ import {
   startLivestream,
   stopLivestream,
   getLivestreamStatus,
-} from "@src/lib/video/livestream";
-import { buildDestination } from "@src/lib/video/stream-destinations";
+} from "@/lib/video/livestream";
+import { buildDestination } from "@/lib/video/stream-destinations";
 
 // Start with MUX + YouTube
 const result = await startLivestream(
@@ -996,7 +996,7 @@ import {
   buildMuxRtmpUrl,
   getMuxPlaybackUrl,
   getMuxThumbnailUrl,
-} from "@src/lib/video/stream-destinations";
+} from "@/lib/video/stream-destinations";
 
 // Build a YouTube destination
 const ytDest = buildDestination("youtube", "xxxx-xxxx-xxxx-xxxx", {

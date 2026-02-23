@@ -135,7 +135,7 @@ export function useScreenShare(): UseScreenShareReturn {
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useScreenShare } from "@src/lib/video/use-screen-share";
+import { useScreenShare } from "@/lib/video/use-screen-share";
 
 type ScreenShareButtonProps = {
   className?: string;
@@ -446,7 +446,7 @@ function CustomControls() {
 "use client";
 
 import { ScreenShareView } from "@/components/video/screen-share-view";
-import { useScreenShare } from "@src/lib/video/use-screen-share";
+import { useScreenShare } from "@/lib/video/use-screen-share";
 
 function FullScreenPresentation() {
   const { isScreenSharing, screenShareTrack } = useScreenShare();
@@ -471,7 +471,7 @@ function FullScreenPresentation() {
 ```tsx
 "use client";
 
-import { useScreenShare } from "@src/lib/video/use-screen-share";
+import { useScreenShare } from "@/lib/video/use-screen-share";
 
 function ScreenShareStatus() {
   const {

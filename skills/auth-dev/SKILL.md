@@ -65,7 +65,7 @@ export default function DevLayout({ children }: { children: React.ReactNode }) {
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn, signOut, useSession } from "@src/lib/auth-client";
+import { signIn, signOut, useSession } from "@/lib/auth-client";
 
 const DEV_USERS = [
   { email: "admin@example.com", password: "Admin123!", name: "Admin User", role: "admin" },
@@ -219,9 +219,9 @@ export async function POST() {
     return NextResponse.json({ error: "Not available in production" }, { status: 404 });
   }
 
-  const { auth } = await import("@src/lib/auth");
-  const { db } = await import("@src/lib/db");
-  const { user } = await import("@src/lib/db/schema/auth");
+  const { auth } = await import("@/lib/auth");
+  const { db } = await import("@/lib/db");
+  const { user } = await import("@/lib/db/schema/auth");
   const { eq } = await import("drizzle-orm");
 
   const results: { email: string; status: string }[] = [];
@@ -280,7 +280,7 @@ export async function POST() {
 
 import { useEffect, useId, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "@src/lib/auth-client";
+import { signIn } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 

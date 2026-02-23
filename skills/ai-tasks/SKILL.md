@@ -587,14 +587,14 @@ Register the task tools in the route pipeline. Task tools need `userId` context,
 Find this in `src/app/api/ai/chat/route.ts`:
 
 ```typescript
-import { allTools } from "@src/lib/ai/tools";
+import { allTools } from "@/lib/ai/tools";
 ```
 
 Replace with:
 
 ```typescript
-import { allTools } from "@src/lib/ai/tools";
-import { createTaskTools } from "@src/lib/ai/tools/task";
+import { allTools } from "@/lib/ai/tools";
+import { createTaskTools } from "@/lib/ai/tools/task";
 ```
 
 Find this in `src/app/api/ai/chat/route.ts`:
@@ -801,7 +801,7 @@ Replace with:
 A simple API endpoint for the task list UI to fetch and update tasks directly (bypassing the AI tool flow for checkbox toggles).
 
 ```typescript
-import { withAuth } from "@src/lib/auth-guard";
+import { withAuth } from "@/lib/auth-guard";
 import { db } from "@/db";
 import { task } from "@/db/schema/task";
 import { eq, and } from "drizzle-orm";

@@ -258,7 +258,7 @@ import {
   getPlatform,
   getAspectRatio,
   PLATFORM_GROUPS,
-} from "@src/lib/platform-specs";
+} from "@/lib/platform-specs";
 
 // Look up a single platform
 const spec = getPlatform("instagram-story");
@@ -278,7 +278,7 @@ const videoPlatforms = videoIds.map(getPlatform);
 
 ## Acceptance Criteria
 
-- `import { PLATFORMS, getPlatform, getAspectRatio, PLATFORM_GROUPS } from "@src/lib/platform-specs"` compiles with no errors
+- `import { PLATFORMS, getPlatform, getAspectRatio, PLATFORM_GROUPS } from "@/lib/platform-specs"` compiles with no errors
 - All 12 platforms are present in `PLATFORMS` with `width`, `height`, `label`, `aspectRatio`, and `formats`
 - `getPlatform("instagram-story").safeZone` is defined with `top: 250` and `bottom: 250`
 - `getPlatform("tiktok").safeZone` is defined with `top: 250` and `bottom: 350`

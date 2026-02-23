@@ -14,7 +14,7 @@ Full-featured real-time group chat with channels, threaded replies, emoji reacti
 ## Prerequisites
 
 - Next.js app with `src/` directory and App Router
-- `auth` skill installed (`withAuth` available at `@src/lib/auth-guard`)
+- `auth` skill installed (`withAuth` available at `@/lib/auth-guard`)
 - `db` skill installed (Drizzle ORM + Postgres)
 - `realtime` skill installed (Liveblocks configured with `@liveblocks/react`)
 - `storage` skill installed (file upload support)
@@ -558,8 +558,8 @@ import { MessageBubble } from "./message-bubble";
 import { ChatInput } from "./chat-input";
 import { ThreadPanel } from "./thread-panel";
 import { TypingIndicator } from "./typing-indicator";
-import { useChatChannel } from "@src/lib/chat/use-chat-channel";
-import type { Message } from "@src/lib/chat/types";
+import { useChatChannel } from "@/lib/chat/use-chat-channel";
+import type { Message } from "@/lib/chat/types";
 import { Loader2 } from "lucide-react";
 
 type ChatChannelProps = {
@@ -704,8 +704,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ReactionPicker } from "./reaction-picker";
 import { MessageSquare, SmilePlus, ImageIcon, FileIcon } from "lucide-react";
-import type { Message } from "@src/lib/chat/types";
-import { segmentMentions } from "@src/lib/chat/mentions";
+import type { Message } from "@/lib/chat/types";
+import { segmentMentions } from "@/lib/chat/mentions";
 
 type MessageBubbleProps = {
   message: Message;
@@ -916,7 +916,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { X } from "lucide-react";
 import { MessageBubble } from "./message-bubble";
 import { ChatInput } from "./chat-input";
-import type { Message } from "@src/lib/chat/types";
+import type { Message } from "@/lib/chat/types";
 
 type ThreadPanelProps = {
   parentMessage: Message;
@@ -1318,10 +1318,10 @@ export function ChatInput({ onSend, placeholder = "Type a message...", compact =
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod/v4";
-import { db } from "@src/lib/db";
-import { channels } from "@src/lib/db/schema/chat-messages";
+import { db } from "@/lib/db";
+import { channels } from "@/lib/db/schema/chat-messages";
 import { eq, desc } from "drizzle-orm";
-import { withAuth } from "@src/lib/auth-guard";
+import { withAuth } from "@/lib/auth-guard";
 
 const createChannelSchema = z.object({
   name: z.string().min(1).max(100),
@@ -1372,10 +1372,10 @@ export const GET = withAuth(async (request) => {
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod/v4";
-import { db } from "@src/lib/db";
-import { messages, reactions } from "@src/lib/db/schema/chat-messages";
+import { db } from "@/lib/db";
+import { messages, reactions } from "@/lib/db/schema/chat-messages";
 import { eq, desc, lt, and, sql, isNull } from "drizzle-orm";
-import { withAuth } from "@src/lib/auth-guard";
+import { withAuth } from "@/lib/auth-guard";
 
 const sendMessageSchema = z.object({
   channelId: z.string().uuid(),
@@ -1547,10 +1547,10 @@ export const GET = withAuth(async (request) => {
 ```typescript
 import { NextResponse } from "next/server";
 import { z } from "zod/v4";
-import { db } from "@src/lib/db";
-import { reactions } from "@src/lib/db/schema/chat-messages";
+import { db } from "@/lib/db";
+import { reactions } from "@/lib/db/schema/chat-messages";
 import { eq, and } from "drizzle-orm";
-import { withAuth } from "@src/lib/auth-guard";
+import { withAuth } from "@/lib/auth-guard";
 
 const addReactionSchema = z.object({
   messageId: z.string().uuid(),

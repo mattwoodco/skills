@@ -15,7 +15,7 @@ Server-side PDF generation endpoint using `@react-pdf/renderer`. Supports two do
 ## Prerequisites
 
 - Next.js App Router (no `src/` directory)
-- better-auth session via `@src/lib/auth`
+- better-auth session via `@/lib/auth`
 
 ## Installation
 
@@ -324,10 +324,10 @@ export function SummaryPDF({ input }: SummaryPDFProps) {
 import { type NextRequest, NextResponse } from "next/server";
 import { renderToBuffer } from "@react-pdf/renderer";
 import { headers } from "next/headers";
-import { auth } from "@src/lib/auth";
-import { StoryboardPDF } from "@src/lib/pdf-export/storyboard-pdf";
-import { SummaryPDF } from "@src/lib/pdf-export/summary-pdf";
-import type { StoryboardPdfInput, SummaryPdfInput } from "@src/lib/pdf-export/storyboard-pdf";
+import { auth } from "@/lib/auth";
+import { StoryboardPDF } from "@/lib/pdf-export/storyboard-pdf";
+import { SummaryPDF } from "@/lib/pdf-export/summary-pdf";
+import type { StoryboardPdfInput, SummaryPdfInput } from "@/lib/pdf-export/storyboard-pdf";
 
 type PdfInput = StoryboardPdfInput | SummaryPdfInput;
 
@@ -432,7 +432,7 @@ export async function exportToPdf(
 ## Usage
 
 ```typescript
-import { exportToPdf } from "@src/lib/pdf-export/client";
+import { exportToPdf } from "@/lib/pdf-export/client";
 
 // Storyboard PDF
 await exportToPdf({

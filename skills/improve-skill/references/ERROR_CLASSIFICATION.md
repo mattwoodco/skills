@@ -35,7 +35,7 @@ Module not found: 'zod'
 **Example error:**
 
 ```
-Cannot find module '@src/lib/missing-helper'
+Cannot find module '@/lib/missing-helper'
 ```
 
 ---

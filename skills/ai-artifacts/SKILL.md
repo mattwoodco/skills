@@ -958,14 +958,14 @@ Replace with:
 Add the import at the top of the file. Find:
 
 ```typescript
-import { allTools } from "@src/lib/ai/tools";
+import { allTools } from "@/lib/ai/tools";
 ```
 
 Replace with:
 
 ```typescript
-import { allTools } from "@src/lib/ai/tools";
-import { artifactTools } from "@src/lib/ai/tools/artifact";
+import { allTools } from "@/lib/ai/tools";
+import { artifactTools } from "@/lib/ai/tools/artifact";
 ```
 
 Also append artifact instructions to the system prompt. Find:

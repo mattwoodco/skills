@@ -526,7 +526,7 @@ import {
   createSlideMarkdown,
   type SlideContent,
   type ExportFormat,
-} from "@src/lib/slides";
+} from "@/lib/slides";
 
 type SlidesToolResult =
   | {
@@ -689,7 +689,7 @@ Create `src/app/api/slides/route.ts`:
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { convertMarkdownToSlides, type ExportFormat } from "@src/lib/slides";
+import { convertMarkdownToSlides, type ExportFormat } from "@/lib/slides";
 
 export async function POST(request: NextRequest) {
   try {

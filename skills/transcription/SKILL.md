@@ -378,8 +378,8 @@ export function useTranscription(
 "use client";
 
 import { useRef, useEffect, useId, useMemo } from "react";
-import { cn } from "@src/lib/utils";
-import type { TranscriptSegment } from "@src/lib/video/types-transcription";
+import { cn } from "@/lib/utils";
+import type { TranscriptSegment } from "@/lib/video/types-transcription";
 
 /** Color palette for speaker labels */
 const SPEAKER_COLORS = [
@@ -511,8 +511,8 @@ export function LiveTranscript({
 "use client";
 
 import { useState, useMemo, useCallback, useId } from "react";
-import { cn } from "@src/lib/utils";
-import type { TranscriptSegment, Speaker } from "@src/lib/video/types-transcription";
+import { cn } from "@/lib/utils";
+import type { TranscriptSegment, Speaker } from "@/lib/video/types-transcription";
 
 const SPEAKER_COLORS = [
   "text-blue-500",
@@ -798,10 +798,10 @@ export * from "./transcripts";
 
 ```typescript
 import { NextResponse } from "next/server";
-import { db } from "@src/lib/db";
-import { transcripts, transcriptSegments } from "@src/lib/db/schema/transcripts";
+import { db } from "@/lib/db";
+import { transcripts, transcriptSegments } from "@/lib/db/schema/transcripts";
 import { desc, eq } from "drizzle-orm";
-import { transcribeAudio } from "@src/lib/video/transcription";
+import { transcribeAudio } from "@/lib/video/transcription";
 
 type StartTranscriptionBody = {
   roomName: string;
@@ -921,8 +921,8 @@ export async function POST(request: Request) {
 ```typescript
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { db } from "@src/lib/db";
-import { transcripts, transcriptSegments } from "@src/lib/db/schema/transcripts";
+import { db } from "@/lib/db";
+import { transcripts, transcriptSegments } from "@/lib/db/schema/transcripts";
 import { eq, asc } from "drizzle-orm";
 
 type RouteContext = { params: Promise<{ id: string }> };
@@ -977,7 +977,7 @@ export async function GET(
 ```tsx
 "use client";
 
-import { useTranscription } from "@src/lib/video/use-transcription";
+import { useTranscription } from "@/lib/video/use-transcription";
 import { LiveTranscript } from "@/components/video/live-transcript";
 
 export function VideoRoomWithTranscript() {
@@ -1013,7 +1013,7 @@ export function VideoRoomWithTranscript() {
 
 import { useEffect, useState } from "react";
 import { TranscriptViewer } from "@/components/video/transcript-viewer";
-import type { TranscriptSegment, Speaker } from "@src/lib/video/types-transcription";
+import type { TranscriptSegment, Speaker } from "@/lib/video/types-transcription";
 
 type TranscriptData = {
   segments: TranscriptSegment[];

@@ -15,7 +15,7 @@ Server-side ZIP bundling endpoint that fetches remote files in parallel and stre
 ## Prerequisites
 
 - Next.js App Router (no `src/` directory)
-- better-auth session via `@src/lib/auth`
+- better-auth session via `@/lib/auth`
 
 ## Installation
 
@@ -37,7 +37,7 @@ lib/zip-download/client.ts
 ```typescript
 import { type NextRequest, NextResponse } from "next/server";
 import { zipSync } from "fflate";
-import { auth } from "@src/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 type ZipRequest = {
@@ -149,7 +149,7 @@ export async function downloadAsZip(
 ## Usage
 
 ```typescript
-import { downloadAsZip } from "@src/lib/zip-download/client";
+import { downloadAsZip } from "@/lib/zip-download/client";
 
 // In a React component or event handler
 await downloadAsZip(

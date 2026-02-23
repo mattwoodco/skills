@@ -151,7 +151,7 @@ All errors from validation tiers should be collected into a structured list:
 ```
 VALIDATION_ERRORS = [
   { source: "tsc", file: "src/lib/auth.tsx", line: 42, message: "Property 'foo' does not exist on type 'Bar'" },
-  { source: "build", file: "src/components/nav.tsx", line: 10, message: "Module not found: '@src/lib/missing'" },
+  { source: "build", file: "src/components/nav.tsx", line: 10, message: "Module not found: '@/lib/missing'" },
   ...
 ]
 ```

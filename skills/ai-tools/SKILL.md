@@ -412,7 +412,7 @@ import {
   type ToolSet,
   type JSONValue,
 } from "ai";
-import { getModel } from "@src/lib/ai";
+import { getModel } from "@/lib/ai";
 ```
 
 Replace with:
@@ -425,8 +425,8 @@ import {
   type ToolSet,
   type JSONValue,
 } from "ai";
-import { getModel } from "@src/lib/ai";
-import { allTools } from "@src/lib/ai/tools";
+import { getModel } from "@/lib/ai";
+import { allTools } from "@/lib/ai/tools";
 ```
 
 ### Step 5: Modify `src/components/ai/message.tsx`

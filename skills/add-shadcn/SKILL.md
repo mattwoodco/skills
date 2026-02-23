@@ -392,7 +392,7 @@ When using shadcn with **Base UI** (not Radix), several component APIs differ. B
 
 ```tsx
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@src/lib/utils";
+import { cn } from "@/lib/utils";
 
 // WRONG - asChild not supported
 <Button asChild variant="outline" size="sm">

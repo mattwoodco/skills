@@ -49,7 +49,7 @@ src/
 import { useState, useEffect, useCallback, type ReactNode } from "react";
 import { LiveKitRoom } from "@livekit/components-react";
 import "@livekit/components-styles/prefabs.css";
-import type { TokenResponse } from "@src/lib/video/types";
+import type { TokenResponse } from "@/lib/video/types";
 
 type VideoRoomProviderProps = {
   roomName: string;

@@ -16,9 +16,9 @@ PDF ingestion pipeline that uploads large PDFs (up to 2GB) to S3-compatible stor
 ## Prerequisites
 
 - Next.js app with `src/` directory and App Router
-- `storage` skill installed (S3/Vercel Blob at `@src/lib/storage/storage-provider`)
+- `storage` skill installed (S3/Vercel Blob at `@/lib/storage/storage-provider`)
 - `db` skill installed (Drizzle ORM + Postgres)
-- `auth` skill installed (`withAuth` at `@src/lib/auth-guard`)
+- `auth` skill installed (`withAuth` at `@/lib/auth-guard`)
 - Docker running with PostgreSQL
 
 ## Installation
@@ -157,11 +157,11 @@ export async function parsePdf(buffer: Buffer): Promise<ParsedPdf> {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { withAuth } from "@src/lib/auth-guard";
-import { db } from "@src/lib/db";
-import { document } from "@src/lib/db/schema/rag";
+import { withAuth } from "@/lib/auth-guard";
+import { db } from "@/lib/db";
+import { document } from "@/lib/db/schema/rag";
 import { eq, desc } from "drizzle-orm";
-import { getStorageProvider } from "@src/lib/storage/storage-provider";
+import { getStorageProvider } from "@/lib/storage/storage-provider";
 
 const MAX_PDF_SIZE = 2 * 1024 * 1024 * 1024; // 2GB
 
@@ -270,11 +270,11 @@ export const POST = withAuth(async (request, { user }) => {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { withAuth } from "@src/lib/auth-guard";
-import { db } from "@src/lib/db";
-import { document, documentPage } from "@src/lib/db/schema/rag";
+import { withAuth } from "@/lib/auth-guard";
+import { db } from "@/lib/db";
+import { document, documentPage } from "@/lib/db/schema/rag";
 import { eq, and } from "drizzle-orm";
-import { getStorageProvider } from "@src/lib/storage/storage-provider";
+import { getStorageProvider } from "@/lib/storage/storage-provider";
 
 /** GET /api/rag/documents/[documentId] — get document details */
 export const GET = withAuth(async (request: NextRequest, { user }) => {
@@ -324,12 +324,12 @@ export const DELETE = withAuth(async (request: NextRequest, { user }) => {
 
 ```typescript
 import { NextRequest, NextResponse } from "next/server";
-import { withAuth } from "@src/lib/auth-guard";
-import { db } from "@src/lib/db";
-import { document, documentPage } from "@src/lib/db/schema/rag";
+import { withAuth } from "@/lib/auth-guard";
+import { db } from "@/lib/db";
+import { document, documentPage } from "@/lib/db/schema/rag";
 import { eq, and } from "drizzle-orm";
-import { getStorageProvider } from "@src/lib/storage/storage-provider";
-import { parsePdf } from "@src/lib/rag/pdf-parser";
+import { getStorageProvider } from "@/lib/storage/storage-provider";
+import { parsePdf } from "@/lib/rag/pdf-parser";
 
 const BATCH_SIZE = 10;
 
