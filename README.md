@@ -11,10 +11,31 @@ Each skill/feature lives under`skills/<name>/SKILL.md`, following the [Agent Ski
 
 ## Install
 
+### Claude Code
+
 ```text
 /plugin marketplace add mattwoodco/skills
 /plugin install skills@mattwoodco
 ```
+
+### Cursor
+
+Install from this repository:
+
+```text
+/add-plugin https://github.com/mattwoodco/skills
+```
+
+Cursor will read the manifest from `.cursor-plugin/plugin.json`.
+
+Install locally while developing this plugin:
+
+```text
+/add-plugin /Users/mw/Developer/mattwoodco/skills
+```
+
+For local installs, Cursor reads `.cursor-plugin/plugin.json` from that folder.
+Marketplace submission guide: [docs/cursor-marketplace-approval.md](docs/cursor-marketplace-approval.md).
 
 1. **Entry skills**
    - `add-project`: start a new project from an idea
