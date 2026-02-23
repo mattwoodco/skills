@@ -11,13 +11,13 @@ New projects must be added here and in `loops/<project>/` per [loops/README.md](
 
 ## Entries
 
-## 1. -mood-board - Designer inspiration OS
+## 1. -design-mood-board - Designer inspiration OS
 
 | Field | Value |
 |-------|--------|
-| **Plan** | [docs/plans/2026-02-22--mood-board-design.md](docs/plans/2026-02-22--mood-board-design.md) |
-| **Ralph loop** | [loops/-mood-board/](loops/-mood-board/) |
-| **Generation git** | `/Users/mw/Developer/mattwoodco/-mood-board@bbc018b` |
+| **Plan** | [docs/plans/2026-02-22--design-mood-board-design.md](docs/plans/2026-02-22--design-mood-board-design.md) |
+| **Ralph loop** | [loops/-design-mood-board/](loops/-design-mood-board/) |
+| **Generation git** | `/Users/mw/Developer/mattwoodco/-design-mood-board@bbc018b` |
 
 **Description:**  Mood Board is a production-oriented MVP for design teams to capture visual references from browser/mobile, auto-process them with AI metadata, curate them in clusters, and retrieve them via hybrid semantic and structured search while preserving strict visibility controls.
 
