@@ -9,7 +9,11 @@ Use this guide when you want to submit this plugin to the Cursor Marketplace.
 - Keep version and description aligned with `.claude-plugin/plugin.json` so both channels stay in sync.
 - Verify your skill paths are valid (`./skills/add-feature`, `./skills/add-spec`, `./skills/add-project`).
 
-## 2) Validate before submission
+## 2) Local development (when `/add-plugin` doesn't load)
+
+Open this repo as the Cursor workspace and edit `.cursor-plugin/` and `skills/` there; the agent has full context. To test from another project, @-mention skill files (e.g. `@skills/add-feature/SKILL.md`) or rely on Marketplace once approved.
+
+## 3) Validate before submission
 
 - Confirm `plugin.json` is valid JSON.
 - Confirm `.cursor-plugin/marketplace.json` is valid JSON if you are publishing a marketplace index.
@@ -25,7 +29,7 @@ Use this guide when you want to submit this plugin to the Cursor Marketplace.
 /add-plugin /Users/mw/Developer/mattwoodco/skills
 ```
 
-## 3) Build and submit
+## 4) Build and submit
 
 Follow Cursor's plugin building/submission documentation:
 
@@ -33,7 +37,7 @@ Follow Cursor's plugin building/submission documentation:
 - Building plugins: [https://cursor.com/docs/plugins/building](https://cursor.com/docs/plugins/building)
 - Official plugin examples: [https://github.com/cursor/plugins](https://github.com/cursor/plugins)
 
-## 4) Review expectations
+## 5) Review expectations
 
 Marketplace plugins go through manual review for quality and security.
 
@@ -45,7 +49,7 @@ Practical checklist before you submit:
 - Reproducible install instructions in `README.md`.
 - Version bumped for each resubmission with meaningful changes.
 
-## 5) If review feedback comes back
+## 6) If review feedback comes back
 
 - Address each reviewer note directly.
 - Update the manifest/docs/tests as needed.

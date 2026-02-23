@@ -35,6 +35,9 @@ Install locally while developing this plugin:
 ```
 
 For local installs, Cursor reads `.cursor-plugin/plugin.json` from that folder.
+
+**Local dev when `/add-plugin` doesn't load:** Open this repo as your Cursor workspace (`File → Open Folder` → `skills`). The agent sees `AGENTS.md`, `skills/`, and `.cursor-plugin/` directly, so you can edit manifests and skills and run validations here. To use these skills from another project, open that project in Cursor and @-mention the skill paths (e.g. `@skills/add-feature/SKILL.md`) or wait for Marketplace/install to work.
+
 Marketplace submission guide: [docs/cursor-marketplace-approval.md](docs/cursor-marketplace-approval.md).
 
 1. **Entry skills**
