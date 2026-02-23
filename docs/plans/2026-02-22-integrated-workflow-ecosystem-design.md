@@ -33,7 +33,7 @@ Integration strategy?
 
 - Workflow engine for stage-to-stage orchestration
 - Context bridge for passing artifacts/tokens/prompts between tools
-- Adapter layer for Cosmos, Figma, Claude, v0, and deploy systems
+- Adapter layer for , Figma, Claude, v0, and deploy systems
 - Observability + notification layer for run status and bottlenecks
 - Workflow templates for common design-to-production journeys
 

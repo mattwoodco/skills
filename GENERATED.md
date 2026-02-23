@@ -11,7 +11,27 @@ New projects must be added here and in `loops/<project>/` per [loops/README.md](
 
 ## Entries
 
-Add new project entries below.
+## 1. -mood-board - Designer inspiration OS
+
+| Field | Value |
+|-------|--------|
+| **Plan** | [docs/plans/2026-02-22--mood-board-design.md](docs/plans/2026-02-22--mood-board-design.md) |
+| **Ralph loop** | [loops/-mood-board/](loops/-mood-board/) |
+| **Generation git** | `/Users/mw/Developer/mattwoodco/-mood-board@bbc018b` |
+
+**Description:**  Mood Board is a production-oriented MVP for design teams to capture visual references from browser/mobile, auto-process them with AI metadata, curate them in clusters, and retrieve them via hybrid semantic and structured search while preserving strict visibility controls.
+
+**Major features:**
+
+- Browser and mobile capture into a shared inbox with `processing`, `ready`, and `needs_attention`
+- AI processing pipeline for tags, colors, embeddings, and duplicate checks
+- Cluster curation workflows for create/edit/move/remove operations
+- Hybrid retrieval blending semantic similarity and structured filters
+- Sharing controls enforcing private/team/public boundaries
+
+**Use-cases:** Validate a modular-monolith architecture for creative-reference workflows where ingestion latency, AI enrichment reliability, and privacy-safe collaboration must coexist in an MVP-ready stack.
+
+**Skills used:** `create-next`, `docker`, `env-config`, `add-shadcn`, `db`, `e2e`, `auth`, `auth-dev`, `storage`, `storage-ui`, `queue`, `ai-core`, `ai-rag-vectors`, `search`, `observability`, `analytics`
 
 ---
 

@@ -1,4 +1,4 @@
-# Cosmos Mood Board - Design
+#  Mood Board - Design
 
 **Date**: 2026-02-22  
 **Status**: APPROVED  
